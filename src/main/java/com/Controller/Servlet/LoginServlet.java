@@ -17,16 +17,20 @@ import java.sql.SQLException;
 public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        //declare to the page redirect
         String redirect="";
 
+        //parameters for validation
         String user= request.getParameter("user");
         String password = request.getParameter("password");
         String type = request.getParameter("selectType");
 
+        //instance references for login
         UserDao dao=new UserDao();
         User userLogin=new User();
         Connection con=(Connection)getServletContext().getAttribute("database");
 
+        //defined new user app
         userLogin.setTypeRol(type);
         userLogin.setNickName(user);
         userLogin.setPassword(password);
