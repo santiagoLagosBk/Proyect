@@ -10,10 +10,11 @@ public class Connect {
     private static String PASSWORD="123";
     private static final String URL="jdbc:mysql://localhost:3306/otra?useTimezone=true&serverTimezone=UTC";
 
-        Connection con;
+
 
     public static Connection getConnectionDb(){
 
+            Connection con=null;
 
         try{
 
@@ -24,6 +25,7 @@ public class Connect {
             e.printStackTrace();
         }
 
+        return con;
 
     }
 

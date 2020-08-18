@@ -17,9 +17,10 @@
     <nav></nav>
     <main>
         <%
-            if (request.getAttribute("tipo")!=null){%>
+            if (request.getAttribute("error")!=null){%>
 
-            <h4><%=request.getAttribute("tipo")%></h4>
+
+            <h4><%=request.getAttribute("error")%></h4>
         <%}%>
 
         <section>
