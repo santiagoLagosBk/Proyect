@@ -13,9 +13,13 @@
 <body>
 
     <header></header>
-    <nav></nav>
+    <nav><%@include file="../Templates/NavBar.jsp"%></nav>
     <main>
-    <a href="LoginServlet">login</a>
+
+        <%if(request.getAttribute("security")!=null){%>
+
+            <p><%=request.getAttribute("security")%></p>
+        <%}%>
     <h2>hola mundo</h2>
 
     </main>

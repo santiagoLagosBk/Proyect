@@ -10,17 +10,22 @@
 <head>
 
     <title> Login Users</title>
+
+
+
 </head>
 <body>
 
     <header></header>
-    <nav></nav>
+    <nav><%@include file="../Templates/NavBar.jsp"%></nav>
     <main>
         <%
             if (request.getAttribute("error")!=null){%>
 
+        <div class="alert alert-primary" role="alert">
+            <%=request.getAttribute("error")%>
+        </div>
 
-            <h4><%=request.getAttribute("error")%></h4>
         <%}%>
 
         <section>
@@ -41,14 +46,14 @@
                             <td>
                                 <select name="selectType">
                                     <option value="-1" selected> Select user type </option>
-                                    <option value="<%=request.getAttribute("type1")%>"> admin </option>
-                                    <option value="<%=request.getAttribute("type2")%>"> employee </option>
+                                    <option value="admin"> admin </option>
+                                    <option value="employee"> employee </option>
                                 </select>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <button type="submit" >Submit</button>
+                <button type="submit" id="acction">Submit</button>
             </form>
         </section>
 
@@ -56,7 +61,6 @@
     </main>
 
     <footer></footer>
-
 
 </body>
 </html>

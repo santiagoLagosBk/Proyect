@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -25,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         String user= request.getParameter("user");
         String password = request.getParameter("password");
         String type = request.getParameter("selectType");
-
+        HttpSession session= request.getSession();
 
         //instance references for login
         UserDao dao=new UserDao();
@@ -41,24 +42,32 @@ public class LoginServlet extends HttpServlet {
             // db condition validate
             if(dao.login(con,userLogin)){
 
-                request.setAttribute("user",user);
+                request.setAttribute("user",userLogin.getNickName());
 
 
                 //validate type user with an enum
                 if (userLogin.getTypeRol().equalsIgnoreCase(String.valueOf(TypeUser.admin))){
-                    redirect="/views/admin.jsp";
+
+                    session.setAttribute("keyAdmin",TypeUser.admin);
+
+                    redirect="/views/admin/admin.jsp";
                 }else{
                     if(userLogin.getTypeRol().equalsIgnoreCase(String.valueOf(TypeUser.employee))){
-                        redirect="/views/employee.jsp";
+
+                        session.setAttribute("keyEmployee",TypeUser.employee);
+                        redirect="/views/employee/employee.jsp";
                     }
                 }
 
                 //   db condition validation ended
             }else{
-                String error="invalidate credentials, please login again";
+
+                String error="invalidate credentials, please try again";
                 request.setAttribute("error", error);
                 redirect="/views/login.jsp";
             }
+
+
 
         RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
         dispatcher.forward(request,response);
@@ -68,8 +77,6 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setAttribute("type1", TypeUser.admin);
-        request.setAttribute("type2",TypeUser.employee);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/views/login.jsp");
         dispatcher.forward(request,response);
