@@ -40,6 +40,7 @@ public class UserDao implements InterfaceUserDao{
                 user.setAllLastName(rs.getString("u.lastname"));
                 user.setLastLogin(rs.getDate("u.lastlogin"));
                 user.setTypeRol(rs.getString("r.name_role"));
+                user.setActive(rs.getBoolean("u.active"));
 
                 return true;
             }

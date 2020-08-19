@@ -41,8 +41,8 @@
                             <td>
                                 <select name="selectType">
                                     <option value="-1" selected> Select user type </option>
-                                    <option value="admin"> Admin </option>
-                                    <option value="employee"> employee </option>
+                                    <option value="<%=request.getAttribute("type1")%>"> admin </option>
+                                    <option value="<%=request.getAttribute("type2")%>"> employee </option>
                                 </select>
                             </td>
                         </tr>
