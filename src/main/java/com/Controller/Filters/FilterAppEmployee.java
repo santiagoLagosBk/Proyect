@@ -25,6 +25,7 @@ public class FilterAppEmployee implements Filter {
 
             req.setAttribute("security",security);
             RequestDispatcher dispatcher =req.getRequestDispatcher("/views/index.jsp");
+            dispatcher.forward(req,resp);
         }
 
     }

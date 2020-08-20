@@ -8,15 +8,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/ServletAdmin")
-public class ServletAdmin extends HttpServlet {
+@WebServlet("/PanelEmployeeServlet")
+public class PanelEmployeeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/admin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/employee/panelEmpo.jsp");
         dispatcher.forward(request,response);
     }
 }

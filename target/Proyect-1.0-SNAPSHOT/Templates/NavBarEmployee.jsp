@@ -27,7 +27,7 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="ServletProducts">admin Employees</a>
+                <a class="nav-link" href="PanelEmployeeServlet">register product</a>
             </li>
             <li class="nav-item">
 

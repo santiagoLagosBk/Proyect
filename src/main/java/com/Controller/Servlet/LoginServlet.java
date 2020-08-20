@@ -1,6 +1,8 @@
 package com.Controller.Servlet;
 
 import com.Controller.Dao.UserDao;
+import com.Model.Admin;
+import com.Model.Employee;
 import com.Model.TypeUser;
 import com.Model.User;
 
@@ -30,42 +32,52 @@ public class LoginServlet extends HttpServlet {
 
         //instance references for login
         UserDao dao=new UserDao();
-        User userLogin=new User();
+
         Connection con=(Connection)getServletContext().getAttribute("database");
 
         //defined new user app
-        userLogin.setTypeRol(type);
-        userLogin.setNickName(user);
-        userLogin.setPassword(password);
-        userLogin.setActive(true);
+        User useradmin=new Admin();
+        User userEmployee=new Employee();
 
-            // db condition validate
-            if(dao.login(con,userLogin)){
+        String error="invalidate credentials, please try again";
+        request.setAttribute("error", error);
 
-                request.setAttribute("user",userLogin.getNickName());
+        if(type.equalsIgnoreCase(String.valueOf(TypeUser.employee))){
 
 
-                //validate type user with an enum
-                if (userLogin.getTypeRol().equalsIgnoreCase(String.valueOf(TypeUser.admin))){
+            userEmployee.setTypeRol(type);
+            userEmployee.setNickName(user);
+            userEmployee.setPassword(password);
+            userEmployee.setActive(true);
 
-                    session.setAttribute("keyAdmin",TypeUser.admin);
+            if (dao.login(con,userEmployee)){
 
-                    redirect="/views/admin/admin.jsp";
-                }else{
-                    if(userLogin.getTypeRol().equalsIgnoreCase(String.valueOf(TypeUser.employee))){
-
-                        session.setAttribute("keyEmployee",TypeUser.employee);
-                        redirect="/views/employee/employee.jsp";
-                    }
-                }
-
-                //   db condition validation ended
+                session.setAttribute("keyEmployee",TypeUser.employee);
+                redirect="/views/employee/employee.jsp";
             }else{
 
-                String error="invalidate credentials, please try again";
-                request.setAttribute("error", error);
                 redirect="/views/login.jsp";
             }
+
+        }
+        if (type.equalsIgnoreCase(String.valueOf(TypeUser.admin))){
+
+
+            useradmin.setTypeRol(type);
+            useradmin.setNickName(user);
+            useradmin.setPassword(password);
+            useradmin.setActive(true);
+
+
+            if (dao.login(con,useradmin)){
+
+                session.setAttribute("keyAdmin",TypeUser.admin);
+                redirect="/views/admin/admin.jsp";
+
+            }else{
+                redirect="/views/login.jsp";
+            }
+        }
 
 
 

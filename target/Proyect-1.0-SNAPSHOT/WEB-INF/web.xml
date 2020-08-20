@@ -14,12 +14,14 @@
         <filter-name>FilterAppAdmin</filter-name>
         <filter-class>com.Controller.Filters.FilterAppAdmin</filter-class>
     </filter>
+
     <filter-mapping>
         <filter-name>FilterAppAdmin</filter-name>
-        <url-pattern>com.Controller.Servlet.LogoutServlet</url-pattern>
-        <url-pattern>com.Controller.Servlet.ServletAdmin</url-pattern>
-
+        <url-pattern>/LogoutServlet</url-pattern>
+        <url-pattern>/PaneAdminServlet</url-pattern>
     </filter-mapping>
+
+
     <filter>
         <filter-name>FilterAppEmployee</filter-name>
         <filter-class>com.Controller.Filters.FilterAppEmployee</filter-class>
@@ -27,8 +29,8 @@
 
     <filter-mapping>
         <filter-name>FilterAppEmployee</filter-name>
-        <url-pattern>com.Controller.Servlet.EmployeesServlet</url-pattern>
-        <url-pattern>com.Controller.Servlet.LogoutServlet</url-pattern>
+        <url-pattern>/PanelEmployeeServlet</url-pattern>
+        <url-pattern>/LogoutServlet</url-pattern>
     </filter-mapping>
 
 

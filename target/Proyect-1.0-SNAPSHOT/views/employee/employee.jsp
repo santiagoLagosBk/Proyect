@@ -11,6 +11,11 @@
     <title>Title</title>
 </head>
 <body>
+<header></header>
+<nav><%@include file="/Templates/NavBarEmployee.jsp"%></nav>
+<main>
 <h2>Welcome employee</h2>
+
+</main>
 </body>
 </html>

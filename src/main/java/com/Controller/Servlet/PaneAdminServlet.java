@@ -8,16 +8,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet( "/EmployeesServlet")
-public class EmployeesServlet extends HttpServlet {
+@WebServlet( "/PaneAdminServlet")
+public class PaneAdminServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/employee/employee.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/views/admin/PanelAdmin.jsp");
         dispatcher.forward(request,response);
     }
 }

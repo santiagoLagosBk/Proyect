@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Hogar
-  Date: 19/8/2020
-  Time: 5:01
+  Date: 20/8/2020
+  Time: 10:02
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,7 +12,10 @@
 </head>
 <body>
 <header></header>
-<nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
-<p>esta es la otra</p>
+<nav><%@include file="/Templates/NavBarEmployee.jsp"%></nav>
+<main>
+
+    <h2>welcome to panel employee</h2>
+</main>
 </body>
 </html>

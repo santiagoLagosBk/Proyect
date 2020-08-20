@@ -2,7 +2,7 @@ package com.Model;
 
 import java.util.Date;
 
-public  class  User {
+public abstract class  User {
 
     private int idUser;
     private String AllName;

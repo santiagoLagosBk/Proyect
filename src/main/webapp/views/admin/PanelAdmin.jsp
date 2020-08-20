@@ -1,19 +1,23 @@
 <%--
   Created by IntelliJ IDEA.
   User: Hogar
-  Date: 19/8/2020
-  Time: 5:53
+  Date: 20/8/2020
+  Time: 10:03
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
-
+    <title>admin</title>
 </head>
 <body>
 <header></header>
-<nav></nav>
-<h2>employee</h2>
+<nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
+<main>
+
+    <h2>welcome to Admin</h2>
+
+
+</main>
 </body>
 </html>
