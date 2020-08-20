@@ -8,10 +8,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-
     <title> Login Users</title>
 
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
+    <script type="text/javascript" defer>
 
+        function validate(){
+            let validation=false;
+
+            let x =confirm("esta seguro");
+            if(x===true){
+                validation=true;
+            }
+            return validation;
+        }
+
+ </script>
 
 </head>
 <body>
@@ -53,7 +65,7 @@
                         </tr>
                     </table>
                 </div>
-                <button type="submit" id="acction">Submit</button>
+                <button type="submit" id="acction" onclick="return validate()">Submit</button>
             </form>
         </section>
 
