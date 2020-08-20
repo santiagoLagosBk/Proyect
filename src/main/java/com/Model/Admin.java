@@ -46,12 +46,12 @@ public class Admin extends User{
     }
 
     @Override
-    public Date getLastLogin() {
+    public String getLastLogin() {
         return super.getLastLogin();
     }
 
     @Override
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(String lastLogin) {
         super.setLastLogin(lastLogin);
     }
 

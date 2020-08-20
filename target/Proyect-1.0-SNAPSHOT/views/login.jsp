@@ -16,13 +16,12 @@
         function validate(){
             let validation=false;
 
-            let x =confirm("esta seguro");
+            let x =confirm("esta seguro de iniciar sesion");
             if(x===true){
                 validation=true;
             }
             return validation;
         }
-
  </script>
 
 </head>

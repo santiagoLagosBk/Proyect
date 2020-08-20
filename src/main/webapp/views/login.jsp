@@ -11,18 +11,6 @@
     <title> Login Users</title>
 
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
-    <script type="text/javascript" defer>
-
-        function validate(){
-            let validation=false;
-
-            let x =confirm("esta seguro de iniciar sesion");
-            if(x===true){
-                validation=true;
-            }
-            return validation;
-        }
- </script>
 
 </head>
 <body>
@@ -64,7 +52,7 @@
                         </tr>
                     </table>
                 </div>
-                <button type="submit" id="acction" onclick="return validate()">Submit</button>
+                <button type="submit" id="acction">Submit</button>
             </form>
         </section>
 

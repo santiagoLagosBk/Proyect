@@ -8,14 +8,14 @@ public abstract class  User {
     private String AllName;
     private String AllLastName;
     private String password;
-    private Date lastLogin;
+    private String lastLogin;
     private String nickName;
     private String typeRol;
     private boolean active;
 
 
     public User(int idUser, String allName, String allLastName,
-                String password, Date lastLogin, String nickName,
+                String password, String lastLogin, String nickName,
                 String typeRol, boolean active) {
 
         this.idUser = idUser;
@@ -62,11 +62,11 @@ public abstract class  User {
         this.password = password;
     }
 
-    public Date getLastLogin() {
+    public String getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(String lastLogin) {
         this.lastLogin = lastLogin;
     }
 

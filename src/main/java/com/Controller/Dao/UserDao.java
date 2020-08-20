@@ -2,10 +2,10 @@ package com.Controller.Dao;
 
 import com.Model.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UserDao implements InterfaceUserDao{
 
@@ -38,7 +38,6 @@ public class UserDao implements InterfaceUserDao{
                 user.setIdUser(rs.getInt("u.idusuario"));
                 user.setAllName(rs.getString("u.allName"));
                 user.setAllLastName(rs.getString("u.lastname"));
-                user.setLastLogin(rs.getDate("u.lastlogin"));
                 user.setTypeRol(rs.getString("r.name_role"));
                 user.setActive(rs.getBoolean("u.active"));
 
@@ -52,8 +51,35 @@ public class UserDao implements InterfaceUserDao{
 
         }
 
-
-
         return false;
+    }
+
+    @Override
+    public String getDate() {
+
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-dd-mm hh:mm:ss");
+        Date date= Calendar.getInstance().getTime();
+
+        return dateFormat.format(date);
+    }
+
+    @Override
+    public void uploadDateLogin(Connection connection, User user) {
+
+
+        PreparedStatement ps;
+
+        try {
+            String sqlUpdateDate = "update usuario set lastlogin=? where idusuario=?";
+            ps= connection.prepareStatement(sqlUpdateDate);
+            ps.setString(1,user.getLastLogin());
+            ps.setInt(2,user.getIdUser());
+
+            ps.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
     }
 }
