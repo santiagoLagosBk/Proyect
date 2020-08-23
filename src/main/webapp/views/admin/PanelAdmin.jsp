@@ -14,7 +14,16 @@
 <header></header>
 <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
 <main>
+    <% if (request.getAttribute("messageEdit")!=null){%>
 
+    <div class="alert alert-secondary" role="alert">
+        <%=request.getAttribute("messageEdit")%>
+    </div>
+    <%}else{%>
+    <div class="alert alert-secondary" role="alert">
+        edit insert or delete a category
+    </div>
+    <%}%>
     <h2>welcome to Admin</h2>
 
 

@@ -13,8 +13,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/EditCategoriesServlet")
-public class EditCategoriesServlet extends HttpServlet {
+@WebServlet("/ShowFeaturesServlet")
+public class ShowFeaturesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Category> categoriesList =(ArrayList)request.getSession().getAttribute("allCategories");

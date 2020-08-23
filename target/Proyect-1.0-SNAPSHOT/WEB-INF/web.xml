@@ -19,7 +19,8 @@
         <filter-name>FilterAppAdmin</filter-name>
         <url-pattern>/PaneAdminServlet</url-pattern>
         <url-pattern>/AdminCategoriesServlet</url-pattern>
-        <url-pattern>/EditCategoriesServlet</url-pattern>
+        <url-pattern>/ShowFeaturesServlet</url-pattern>
+        <url-pattern>/EditCategoryServlet</url-pattern>
     </filter-mapping>
 
 

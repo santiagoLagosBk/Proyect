@@ -54,7 +54,9 @@ public class CategoryDao implements InterfaceCategoryDao {
             ps = con.prepareStatement(sqlUpdate);
             ps.setString(1,category.getNameCategory());
             ps.setInt(2, category.getIdCategory());
-            ps.executeUpdate();
+            if(ps.executeUpdate()!=0){
+                return  true;
+            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

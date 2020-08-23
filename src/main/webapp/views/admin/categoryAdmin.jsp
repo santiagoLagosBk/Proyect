@@ -17,6 +17,7 @@
     <header></header>
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
+
         <div>
             <a href="#">register category</a>
         </div>
@@ -48,7 +49,7 @@
                     <td><%=category.getIdCategory()%></td>
                     <td><%=category.getNameCategory()%></td>
                     <td>
-                        <form method="post" action="EditCategoriesServlet">
+                        <form method="post" action="ShowFeaturesServlet">
                             <input type="hidden" name="editCategory" value="<%=category.getIdCategory()%>">
                             <input type="submit" value="edit">
                         </form>

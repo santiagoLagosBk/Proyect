@@ -17,19 +17,24 @@
     <header></header>
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
+
+
         <% ArrayList<Category>featuresCategory =(ArrayList)request.getAttribute("featuresList");
             for (Category category:featuresCategory){
             %>
 
-        <form method="post">
+        <form method="post" action="EditCategoryServlet">
             <label>category id</label><br>
-            <input type="text" value="<%=category.getIdCategory()%>" readonly><br>
+            <input type="text" value="<%=category.getIdCategory()%>" name="idCategory" readonly><br>
             <label>category name</label><br>
-            <input type="text" value="<%=category.getNameCategory()%>">
+            <input type="text" value="<%=category.getNameCategory()%>" name="nameCategory">
             <input type="submit" value="edit register">
         </form>
         <%}%>
 
+        <div>
+            <a href="AdminCategoriesServlet">back</a>
+        </div>
     </main>
     <footer>
 
