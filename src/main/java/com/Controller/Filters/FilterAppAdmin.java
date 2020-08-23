@@ -3,6 +3,7 @@ package com.Controller.Filters;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -21,7 +22,9 @@ public class FilterAppAdmin implements Filter {
 
         }else {
 
+            String security="sorry but you don´t have access for this page, please try again";
 
+            req.setAttribute("security",security);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/views/index.jsp");
             dispatcher.forward(req,resp);
         }

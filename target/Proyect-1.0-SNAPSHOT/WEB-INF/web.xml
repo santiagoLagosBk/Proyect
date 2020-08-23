@@ -17,9 +17,11 @@
 
     <filter-mapping>
         <filter-name>FilterAppAdmin</filter-name>
-        <url-pattern>/LogoutServlet</url-pattern>
         <url-pattern>/PaneAdminServlet</url-pattern>
+        <url-pattern>/AdminCategoriesServlet</url-pattern>
+        <url-pattern>/EditCategoriesServlet</url-pattern>
     </filter-mapping>
+
 
 
     <filter>
@@ -30,8 +32,8 @@
     <filter-mapping>
         <filter-name>FilterAppEmployee</filter-name>
         <url-pattern>/PanelEmployeeServlet</url-pattern>
-        <url-pattern>/LogoutServlet</url-pattern>
     </filter-mapping>
+
 
 
 </web-app>

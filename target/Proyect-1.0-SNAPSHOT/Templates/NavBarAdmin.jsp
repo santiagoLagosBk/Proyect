@@ -27,14 +27,18 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="PaneAdminServlet">admin Employees</a>
+                <a class="nav-link" href="AdminCategoriesServlet">categories</a>
             </li>
             <li class="nav-item">
-
-                <a class="nav-link" href="LogoutServlet">Logout</a>
+                <%=request.getSession().getAttribute("name")%>
             </li>
+
         </ul>
     </div>
+    <li class="nav-item">
+
+        <a class="nav-link" href="LogoutServlet">Logout</a>
+    </li>
 </nav>
 
 
