@@ -14,5 +14,7 @@ public interface InterfaceCategoryDao {
 
      boolean deleteCategory(Connection con, Category category);
 
+     boolean addCategory(Connection connection,Category category);
+
      List<Category>getCategoryFeatures(List<Category>list,int search);
 }

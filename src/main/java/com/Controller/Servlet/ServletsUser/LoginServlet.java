@@ -82,6 +82,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("keyAdmin",TypeUser.admin);
                 session.setAttribute("name",useradmin.getNickName());
                 dao.uploadDateLogin(con,useradmin);
+
                 redirect="/views/admin/admin.jsp";
 
             }else{

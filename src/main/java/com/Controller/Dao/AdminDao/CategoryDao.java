@@ -67,6 +67,70 @@ public class CategoryDao implements InterfaceCategoryDao {
 
     @Override
     public boolean deleteCategory(Connection con, Category category) {
+
+        PreparedStatement ps;
+        try {
+             final String sqlDelete = "DELETE FROM catego WHERE id_catego=?";
+            ps = con.prepareStatement(sqlDelete);
+            ps.setInt(1,category.getIdCategory());
+
+            while (ps.executeUpdate()!=0){
+                return true;
+            }
+        }catch (SQLException e ){
+
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean addCategory(Connection connection, Category category) {
+
+        PreparedStatement ps;
+
+        if (!CategoryDao.searchCategory(connection,category.getNameCategory())){
+
+            try {
+                final String sqlInsert = "INSERT INTO catego(id_Catego,name_catego) VALUES (null,?)";
+                ps = connection.prepareStatement(sqlInsert);
+                ps.setString(1, category.getNameCategory());
+
+                while (ps.executeUpdate() != 0) {
+
+                    return true;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+            return false;
+
+
+
+    }
+
+    private static boolean searchCategory(Connection connection,String category){
+
+        PreparedStatement ps;
+
+        try {
+            final String sqlSearh = "SELECT * from catego WHERE name_catego=?";
+            ps = connection.prepareStatement(sqlSearh);
+            ps.setString(1,category);
+
+            ResultSet rs= ps.executeQuery();
+
+            while (rs.next()){
+                return true;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return false;
     }
 

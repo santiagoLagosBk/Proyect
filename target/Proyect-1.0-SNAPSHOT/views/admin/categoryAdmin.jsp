@@ -12,6 +12,8 @@
 <html>
 <head>
     <title>Title</title>
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/app.js" defer></script>
 </head>
 <body>
     <header></header>
@@ -19,7 +21,7 @@
     <main>
 
         <div>
-            <a href="#">register category</a>
+            <a href="AddCategoryServlet">register category</a>
         </div>
 
         <% ArrayList<Category> allCategories=(ArrayList)request.getSession().getAttribute("allCategories");
@@ -55,9 +57,9 @@
                         </form>
                     </td>
                     <td>
-                        <form method="post">
-                            <input type="hidden" name="editCategory" value="<%=category.getIdCategory()%>">
-                            <input type="submit" value="delete">
+                        <form method="post" action="DeleteCategoryServlet">
+                            <input type="hidden" name="deleteCategory" value="<%=category.getIdCategory()%>">
+                            <input onclick=" return deleteCategory()" type="submit" value="delete">
                         </form>
                     </td>
                 </tr>
@@ -68,5 +70,6 @@
 
     </main>
     <footer></footer>
+
 </body>
 </html>
