@@ -6,5 +6,6 @@ inventory proyect named H A N D L E
 1. maven (MVC)
 2. java(JDK 13)
 3. Server (Wildfly and jboss)
+4. MySql(8.0.20)
 
 
