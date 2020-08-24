@@ -16,6 +16,8 @@ import java.sql.Connection;
 @WebServlet("/AddCategoryServlet")
 public class AddCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        // instance objects need
         Connection con = (Connection) getServletContext().getAttribute("database");
         Category category = new Category();
         CategoryDao dao = new CategoryDao();
@@ -23,8 +25,9 @@ public class AddCategoryServlet extends HttpServlet {
         String redirect="";
         String message="";
 
+        // bring the data from  front
         String nameCategory = request.getParameter("nameCategory");
-        category.setNameCategory(nameCategory);
+        category.setNameCategory(nameCategory.toLowerCase());
 
 
             if (dao.addCategory(con, category)){
@@ -34,7 +37,7 @@ public class AddCategoryServlet extends HttpServlet {
             } else {
 
                 message = "Sorry but this category it's already existing";
-                redirect="views/admin/AddCategory.jsp";
+                redirect="views/admin/category/AddCategory.jsp";
             }
 
 
@@ -45,7 +48,7 @@ public class AddCategoryServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/AddCategory.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/category/AddCategory.jsp");
         dispatcher.forward(request,response);
     }
 }

@@ -48,18 +48,23 @@ public class CategoryDao implements InterfaceCategoryDao {
     public boolean editCategory(Connection con, Category category) {
 
         PreparedStatement ps;
+        // first we search a similar data in the database
+        if (!CategoryDao.searchCategory(con,category.getNameCategory())) {
 
-        try {
-            final String sqlUpdate = "UPDATE catego SET  name_catego=? WHERE id_Catego=?";
-            ps = con.prepareStatement(sqlUpdate);
-            ps.setString(1,category.getNameCategory());
-            ps.setInt(2, category.getIdCategory());
-            if(ps.executeUpdate()!=0){
-                return  true;
+            try {
+                final String sqlUpdate = "UPDATE catego SET  name_catego=? WHERE id_Catego=?";
+                ps = con.prepareStatement(sqlUpdate);
+
+                ps.setString(1, category.getNameCategory());
+                ps.setInt(2, category.getIdCategory());
+
+                if (ps.executeUpdate() != 0) {
+                    return true;
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
 
         return false;
@@ -89,7 +94,7 @@ public class CategoryDao implements InterfaceCategoryDao {
     public boolean addCategory(Connection connection, Category category) {
 
         PreparedStatement ps;
-
+        // first we search a similar data in the database
         if (!CategoryDao.searchCategory(connection,category.getNameCategory())){
 
             try {
@@ -143,6 +148,7 @@ public class CategoryDao implements InterfaceCategoryDao {
 
         List<Category> listFeatures =new ArrayList<>();
 
+        // search of item into cookie
         for (Category category:list){
 
             if (category.getIdCategory()==search){
@@ -150,7 +156,6 @@ public class CategoryDao implements InterfaceCategoryDao {
                 listFeatures.add(category);
             }
         }
-
 
         return listFeatures;
     }

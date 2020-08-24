@@ -21,6 +21,8 @@
         <url-pattern>/AdminCategoriesServlet</url-pattern>
         <url-pattern>/ShowFeaturesServlet</url-pattern>
         <url-pattern>/EditCategoryServlet</url-pattern>
+        <url-pattern>/AddCategoryServlet</url-pattern>
+        <url-pattern>/DeleteCategoryServlet</url-pattern>
     </filter-mapping>
 
 

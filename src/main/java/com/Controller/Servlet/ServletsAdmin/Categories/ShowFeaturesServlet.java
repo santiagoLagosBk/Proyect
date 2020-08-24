@@ -17,15 +17,17 @@ import java.util.List;
 public class ShowFeaturesServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        // get data from cookies
         List<Category> categoriesList =(ArrayList)request.getSession().getAttribute("allCategories");
-        int idCategory=Integer.parseInt(request.getParameter("editCategory"));
 
+        // instance objects
         CategoryDao dao = new CategoryDao();
+        int idCategory=Integer.parseInt(request.getParameter("editCategory"));
         List<Category> featuresList =dao.getCategoryFeatures(categoriesList,idCategory);
 
-        request.setAttribute("featuresList",featuresList);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/editCategory.jsp");
+        request.setAttribute("featuresList",featuresList);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/category/editCategory.jsp");
         dispatcher.forward(request,response);
     }
 

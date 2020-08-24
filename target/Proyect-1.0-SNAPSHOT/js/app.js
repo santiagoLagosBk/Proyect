@@ -1,5 +1,11 @@
 
 function deleteCategory(){
+    let conf = confirm('Are you sure you want to delete this employee');
 
-    if(confirm('Are you sure you want to delete this employee')===false) return false;
+    if(conf===true){
+
+        return true;
+    }
+    return false;
+
 }

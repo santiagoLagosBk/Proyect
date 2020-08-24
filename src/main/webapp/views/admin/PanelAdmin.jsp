@@ -21,12 +21,12 @@
 
     <%}%>
 
-    <% if (request.getAttribute("messageEdit")!=null && request.getAttribute("messageDelete")!=null){%>
-    <div class="alert alert-secondary" role="alert">
+    <% if (request.getAttribute("messageEdit")!=null || request.getAttribute("messageDelete")!=null){%>
+    <div class="alert alert-success" role="alert">
         <%=request.getAttribute("messageDelete")%>
     </div>
 
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-danger" role="alert">
         <%=request.getAttribute("messageEdit")%>
     </div>
     <%}else{%>

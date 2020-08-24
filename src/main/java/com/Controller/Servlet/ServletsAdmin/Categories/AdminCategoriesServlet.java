@@ -22,19 +22,20 @@ public class AdminCategoriesServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        // instance objects
         CategoryDao dao = new CategoryDao();
-
         Connection con = (Connection)getServletContext().getAttribute("database");
         List<Category> allCategories = dao.getCategories(con);
+
         if (allCategories==null){
 
             allCategories=new ArrayList<>();
         }
 
+        // handle the register with cookies
         request.getSession().setAttribute("allCategories",allCategories);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/categoryAdmin.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/category/categoryAdmin.jsp");
         dispatcher.forward(request,response);
     }
 }

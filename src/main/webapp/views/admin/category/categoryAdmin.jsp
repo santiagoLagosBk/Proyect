@@ -13,7 +13,7 @@
 <head>
     <title>Title</title>
 
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/app.js" defer></script>
+
 </head>
 <body>
     <header></header>
@@ -59,7 +59,7 @@
                     <td>
                         <form method="post" action="DeleteCategoryServlet">
                             <input type="hidden" name="deleteCategory" value="<%=category.getIdCategory()%>">
-                            <input onclick=" return deleteCategory()" type="submit" value="delete">
+                            <button onclick=" if(confirm('are you sure')===false) return false;"> submit</button>
                         </form>
                     </td>
                 </tr>

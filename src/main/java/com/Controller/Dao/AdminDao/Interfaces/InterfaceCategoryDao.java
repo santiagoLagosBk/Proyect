@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface InterfaceCategoryDao {
 
-     ArrayList<Category> getCategories(Connection con);
+     ArrayList<? extends Object> getCategories(Connection con);
 
      boolean editCategory(Connection con, Category category);
 
@@ -16,5 +16,5 @@ public interface InterfaceCategoryDao {
 
      boolean addCategory(Connection connection,Category category);
 
-     List<Category>getCategoryFeatures(List<Category>list,int search);
+     List<? extends Object>getCategoryFeatures(List<Category>list,int search);
 }

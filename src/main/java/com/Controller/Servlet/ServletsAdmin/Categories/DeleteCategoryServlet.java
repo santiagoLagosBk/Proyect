@@ -16,13 +16,16 @@ import java.sql.Connection;
 public class DeleteCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        int idCategory = Integer.parseInt(request.getParameter("deleteCategory"));
+        // Instance objects and message
         Category category = new Category();
         CategoryDao dao = new CategoryDao();
         Connection con =(Connection) getServletContext().getAttribute("database");
+        String message = "";
 
+        // bring data from front
+        int idCategory = Integer.parseInt(request.getParameter("deleteCategory"));
             category.setIdCategory(idCategory);
-            String message = "";
+
 
             if(dao.deleteCategory(con,category)){
                 message = "the category was delete";
