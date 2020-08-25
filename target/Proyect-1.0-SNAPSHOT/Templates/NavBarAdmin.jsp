@@ -24,21 +24,31 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="PaneAdminServlet">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="AdminCategoriesServlet">categories</a>
+                <a class="nav-link" href="AdminCategoriesServlet">Admin categories</a>
             </li>
             <li class="nav-item">
-                <%=request.getSession().getAttribute("name")%>
+                <a class="nav-link" href="AdminSupplierServlet">Admin Supplier</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Admin User</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Admin Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">profile: <%=request.getSession().getAttribute("name")%></a>
             </li>
 
         </ul>
     </div>
-    <li class="nav-item">
-
-        <a class="nav-link" href="LogoutServlet">Logout</a>
-    </li>
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="LogoutServlet">Logout</a>
+            </li>
+        </ul>
 </nav>
 
 

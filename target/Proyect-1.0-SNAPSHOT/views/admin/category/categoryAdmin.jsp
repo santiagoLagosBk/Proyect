@@ -9,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="../../error.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -30,11 +31,8 @@
             <div>
                 catidad de categorias : <%=allCategories.size()%>
             </div>
-        <%}else{%>
-        <div>
-            catidad de categorias : 0
-        </div>
-        <%}%>
+        <%}else{%><div>catidad de categorias : 0</div><%}%>
+
 
         <table>
             <thead>

@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
+<header></header>
+<nav><%@include file="/Templates/NavBar.jsp"%></nav>
 <h2>Ha ocurrido un error</h2>
 </body>
 </html>

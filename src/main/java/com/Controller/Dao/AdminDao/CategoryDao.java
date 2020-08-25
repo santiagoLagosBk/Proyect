@@ -47,14 +47,14 @@ public class CategoryDao implements InterfaceCategoryDao {
     @Override
     public boolean editCategory(Connection con, Category category) {
 
-        PreparedStatement ps;
+
         // first we search a similar data in the database
         if (!CategoryDao.searchCategory(con,category.getNameCategory())) {
-
+            PreparedStatement ps;
+            final String sqlUpdate = "UPDATE catego SET  name_catego=? WHERE id_Catego=?";
             try {
-                final String sqlUpdate = "UPDATE catego SET  name_catego=? WHERE id_Catego=?";
-                ps = con.prepareStatement(sqlUpdate);
 
+                ps = con.prepareStatement(sqlUpdate);
                 ps.setString(1, category.getNameCategory());
                 ps.setInt(2, category.getIdCategory());
 
@@ -74,8 +74,8 @@ public class CategoryDao implements InterfaceCategoryDao {
     public boolean deleteCategory(Connection con, Category category) {
 
         PreparedStatement ps;
+        final String sqlDelete = "DELETE FROM catego WHERE id_catego=?";
         try {
-             final String sqlDelete = "DELETE FROM catego WHERE id_catego=?";
             ps = con.prepareStatement(sqlDelete);
             ps.setInt(1,category.getIdCategory());
 
@@ -93,12 +93,13 @@ public class CategoryDao implements InterfaceCategoryDao {
     @Override
     public boolean addCategory(Connection connection, Category category) {
 
-        PreparedStatement ps;
+
         // first we search a similar data in the database
         if (!CategoryDao.searchCategory(connection,category.getNameCategory())){
-
+            PreparedStatement ps;
+            final String sqlInsert = "INSERT INTO catego(id_Catego,name_catego) VALUES (null,?)";
             try {
-                final String sqlInsert = "INSERT INTO catego(id_Catego,name_catego) VALUES (null,?)";
+
                 ps = connection.prepareStatement(sqlInsert);
                 ps.setString(1, category.getNameCategory());
 
@@ -121,9 +122,8 @@ public class CategoryDao implements InterfaceCategoryDao {
     private static boolean searchCategory(Connection connection,String category){
 
         PreparedStatement ps;
-
+        final String sqlSearh = "SELECT * from catego WHERE name_catego=?";
         try {
-            final String sqlSearh = "SELECT * from catego WHERE name_catego=?";
             ps = connection.prepareStatement(sqlSearh);
             ps.setString(1,category);
 
