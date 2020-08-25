@@ -1,7 +1,9 @@
 package com.Controller.Servlet.ServletsAdmin.Categories;
 
 import com.Controller.Dao.AdminDao.CategoryDao;
+import com.Model.Admin;
 import com.Model.Category;
+import com.Model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,28 +18,32 @@ import java.sql.Connection;
 public class EditCategoryServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // instance objects and message
-        String message="";
+
         Connection con = (Connection) getServletContext().getAttribute("database");
         Category category = new Category();
         CategoryDao dao = new CategoryDao();
+        User user = new Admin();
 
         // data from front
+        String message=user.getMessage();
+
         int idCategory = Integer.parseInt(request.getParameter("idCategory"));
         String nameCategory = request.getParameter("nameCategory");
 
         category.setIdCategory(idCategory);
         category.setNameCategory(nameCategory.toLowerCase());
 
-        if(dao.editCategory(con,category)){
+        if (!user.searchInput(category.getNameCategory())){
 
-            message="category edited successfully, please refresh the page";
+            if (dao.editCategory(con, category)) {
 
+                message = "category edited successfully, please refresh the page";
 
-        }else{
-            message="ops¡ Try again with different name this it's already existing";
+            } else {
+                message = "ops¡ Try again with different name this it's already existing";
+            }
         }
-
-        request.setAttribute("messageEdit",message);
+        request.setAttribute("messageCategory",message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
         dispatcher.forward(request,response);
 

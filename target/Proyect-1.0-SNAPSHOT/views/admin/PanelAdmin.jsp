@@ -14,23 +14,18 @@
 <header></header>
 <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
 <main>
-    <%if (request.getAttribute("messageEditSupplier")!=null){%>
+
+    <%if (request.getAttribute("messageSupplier")!=null){%>
     <div class="alert alert-success" role="alert">
-        <%=request.getAttribute("messageEditSupplier")%>
-    </div>
-    <%}%>
-    <% if (request.getAttribute("messageEdit")!=null || request.getAttribute("messageDelete")!=null||request.getAttribute("messageAdd")!=null){%>
-    <div class="alert alert-success" role="alert">
-        <%=request.getAttribute("messageDelete")%>
-    </div>
-    <div class="alert alert-danger" role="alert">
-        <%=request.getAttribute("messageEdit")%>
-    </div>
-    <div class="alert alert-success" role="alert">
-        <%=request.getAttribute("messageAdd")%>
+        <%=request.getAttribute("messageSupplier")%>
     </div>
     <%}%>
 
+    <%if (request.getAttribute("messageCategory")!=null){%>
+    <div class="alert alert-success" role="alert">
+        <%=request.getAttribute("messageCategory")%>
+    </div>
+    <%}%>
 
     <h2>welcome to Admin</h2>
 

@@ -12,7 +12,13 @@ public abstract class  User {
     private String nickName;
     private String typeRol;
     private boolean active;
+    private static final String COMPARE="<>/'?¡¿|/*-_=()@";
 
+    public String getMessage() {
+        return message;
+    }
+
+    final private String message="sorry you cannot to write symbols as: <>@/?¡¿|/*-_=()";
 
     public User(int idUser, String allName, String allLastName,
                 String password, String lastLogin, String nickName,
@@ -93,4 +99,29 @@ public abstract class  User {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    /*
+    This method is available for validation classes inputs as
+    data Category
+    data Supplier
+    data of products
+    data user
+
+     */
+    public boolean searchInput(String input){
+
+
+
+       for (int i=0;i<input.length();i++){
+
+        for (int j=0;j<COMPARE.length();j++){
+
+            if (COMPARE.charAt(j)==input.charAt(i)){
+
+                return true;
+            }
+        }
+    }
+        return false;
+}
 }

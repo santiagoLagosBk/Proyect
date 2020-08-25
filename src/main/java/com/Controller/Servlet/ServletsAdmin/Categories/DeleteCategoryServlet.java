@@ -33,7 +33,7 @@ public class DeleteCategoryServlet extends HttpServlet {
                 message="Opss¡ please try again";
             }
 
-        request.setAttribute("messageDelete",message);
+        request.setAttribute("messageCategory",message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
         dispatcher.forward(request,response);
     }

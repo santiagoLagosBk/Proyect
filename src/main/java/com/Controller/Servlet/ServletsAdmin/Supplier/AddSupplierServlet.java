@@ -14,40 +14,41 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 
-@WebServlet("/EditSupplierServlet")
-public class EditSupplierServlet extends HttpServlet {
+@WebServlet("/AddSupplierServlet")
+public class AddSupplierServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        Connection con = (Connection) getServletContext().getAttribute("database");
         SupplierDao dao = new SupplierDao();
         Supplier supplier = new Supplier();
+        Connection connection = (Connection) getServletContext().getAttribute("database");
         User user = new Admin();
+        String message= user.getMessage();
+        String redirect="views/admin/PanelAdmin.jsp";
 
-
-        int supplierId = Integer.parseInt(request.getParameter("supplierId"));
         String supplierName = request.getParameter("supplierName");
-
-        supplier.setIdSupplier(supplierId);
         supplier.setNameSupplier(supplierName.toLowerCase());
 
-
-        // validate of symbols
-        String message = user.getMessage();
         if (!user.searchInput(supplier.getNameSupplier())){
 
-            // validate with database
-            if (dao.editSupplier(con, supplier)) {
-                message = "edited successfully, please check";
-            } else {
-                message = "this name is already existing please try again";
+            if (dao.addSupplier(connection,supplier)){
+
+                message="supplier was successfully registered";
+
+            }else{
+
+                message="Sorry but this supplier it's already existing";
+                redirect = "views/admin/Supplier/addSupplier.jsp";
             }
         }
         request.setAttribute("messageSupplier",message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
         dispatcher.forward(request,response);
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/Supplier/addSupplier.jsp");
+        dispatcher.forward(request,response);
     }
 }

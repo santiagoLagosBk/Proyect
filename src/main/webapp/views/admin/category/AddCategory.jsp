@@ -15,9 +15,9 @@
     <header></header>
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
-        <% if (request.getAttribute("messageAdd")!=null){%>
+        <% if (request.getAttribute("messageCategory")!=null){%>
         <div class="alert alert-danger" role="alert">
-            <%=request.getAttribute("messageAdd")%>
+            <%=request.getAttribute("messageCategory")%>
         </div>
 
         <%}%>

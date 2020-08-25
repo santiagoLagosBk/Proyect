@@ -24,7 +24,7 @@
             <input type="text" name="supplierId" value="<%=supplier.getIdSupplier()%>" readonly><br>
             <label>Name</label><br>
             <input type="text" name="supplierName" value="<%=supplier.getNameSupplier()%>">
-            <input type="submit"  value="edit">
+            <button  type="submit" >Submit</button>
         </form>
         <%}%>
 

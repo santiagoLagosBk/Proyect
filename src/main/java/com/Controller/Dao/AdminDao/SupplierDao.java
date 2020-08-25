@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class SupplierDao implements InterfaceSupplierDao {
@@ -44,6 +45,7 @@ public class SupplierDao implements InterfaceSupplierDao {
     @Override
     public boolean editSupplier(Connection con, Supplier supplier) {
 
+
         if (!SupplierDao.searchSupplier(con,supplier.getNameSupplier())){
 
             PreparedStatement ps;
@@ -72,6 +74,24 @@ public class SupplierDao implements InterfaceSupplierDao {
 
     @Override
     public boolean addSupplier(Connection connection, Supplier supplier) {
+
+        PreparedStatement ps;
+
+        if (!SupplierDao.searchSupplier(connection,supplier.getNameSupplier())) {
+            try {
+                final String sqlAddSupplier = "INSERT INTO proveedor (id_proveedor,name_proveedor) VALUES(null ,?)";
+                ps = connection.prepareStatement(sqlAddSupplier);
+                ps.setString(1, supplier.getNameSupplier());
+
+                while (ps.executeUpdate() != 0) {
+                    return true;
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
         return false;
     }
 
@@ -108,4 +128,7 @@ public class SupplierDao implements InterfaceSupplierDao {
 
         return false;
     }
+
+
+
 }

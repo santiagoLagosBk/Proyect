@@ -2,7 +2,9 @@ package com.Controller.Servlet.ServletsAdmin.Categories;
 
 import com.Config.Connect;
 import com.Controller.Dao.AdminDao.CategoryDao;
+import com.Model.Admin;
 import com.Model.Category;
+import com.Model.User;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,27 +23,30 @@ public class AddCategoryServlet extends HttpServlet {
         Connection con = (Connection) getServletContext().getAttribute("database");
         Category category = new Category();
         CategoryDao dao = new CategoryDao();
+        User user = new Admin();
 
-        String redirect="";
-        String message="";
+        String redirect="views/admin/PanelAdmin.jsp";
+        String message= user.getMessage();
 
         // bring the data from  front
         String nameCategory = request.getParameter("nameCategory");
         category.setNameCategory(nameCategory.toLowerCase());
 
+            if(!user.searchInput(category.getNameCategory())){
 
-            if (dao.addCategory(con, category)){
+                if (dao.addCategory(con, category)) {
 
-                redirect = "views/admin/PanelAdmin.jsp";
-                message = "successfully category registered";
-            } else {
 
-                message = "Sorry but this category it's already existing";
-                redirect="views/admin/category/AddCategory.jsp";
+                    message = "successfully category registered";
+                } else {
+
+                    message = "Sorry but this category it's already existing";
+                    redirect = "views/admin/category/AddCategory.jsp";
+                }
             }
 
 
-        request.setAttribute("messageAdd",message);
+        request.setAttribute("messageCategory",message);
         RequestDispatcher dispatcher = request.getRequestDispatcher(redirect);
         dispatcher.forward(request,response);
     }

@@ -16,6 +16,10 @@
     <header></header>
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
+        <div>
+            <a href="AddSupplierServlet">add Supplier</a>
+        </div>
+
         <% ArrayList<Supplier> categoryArrayList=(ArrayList)request.getSession().getAttribute("categoryArrayList");
                 if (categoryArrayList!=null){%>
                     <div>

@@ -18,4 +18,5 @@ public interface InterfaceSupplierDao {
 
     List<Supplier> getSupplierFeatures(ArrayList<Supplier>list, int search);
 
+
 }
