@@ -23,13 +23,17 @@ public class AdminActiveUsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDao dao = new UserDao();
         Connection con = (Connection) getServletContext().getAttribute("database");
+        ArrayList<User> userActiveList;
 
 
-        ArrayList<User> userActiveList=dao.getActiveAndInactiveUsersList(con,(byte)1);
+
+        userActiveList=dao.getActiveAndInactiveUsersList(con,(byte)1);
 
         if (userActiveList==null){
             userActiveList = new ArrayList<User>();
         }
+
+
         request.getSession().setAttribute("userActiveList",userActiveList);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/Users/UsersActives.jsp");
         dispatcher.forward(request,response);

@@ -32,6 +32,8 @@
 
         <url-pattern>/AdminNotActiveUsersServlet</url-pattern>
         <url-pattern>/AdminActiveUsersServlet</url-pattern>
+        <url-pattern>/TurnOnUsersServlet</url-pattern>
+        <url-pattern>/TurnOffUsersServlet</url-pattern>
     </filter-mapping>
 
 

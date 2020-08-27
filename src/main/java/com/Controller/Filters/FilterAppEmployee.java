@@ -16,7 +16,7 @@ public class FilterAppEmployee implements Filter {
 
         HttpSession session=((HttpServletRequest)req).getSession();
 
-        if (session.getAttribute("keyEmployee")!=null){
+        if (session.getAttribute("keyEmployee")!=null && session.getAttribute("nameEmployee")!=null){
 
             chain.doFilter(req, resp);
 

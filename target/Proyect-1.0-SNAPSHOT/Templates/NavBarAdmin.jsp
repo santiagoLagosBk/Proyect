@@ -48,7 +48,7 @@
                 <a class="nav-link" href="#">Admin Products</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">profile: <%=request.getSession().getAttribute("name")%></a>
+                <a class="nav-link" href="#">profile: <%=request.getSession().getAttribute("nameAdmin")%></a>
             </li>
 
         </ul>

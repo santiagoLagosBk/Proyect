@@ -57,6 +57,7 @@ public class LoginServlet extends HttpServlet {
             if (dao.login(con,userEmployee)){
 
                 session.setAttribute("keyEmployee",TypeUser.employee);
+                session.setAttribute("nameEmployee",userEmployee.getNickName());
                 dao.uploadDateLogin(con,userEmployee);
 
                 redirect="/views/employee/employee.jsp";
@@ -81,7 +82,7 @@ public class LoginServlet extends HttpServlet {
             if (dao.login(con,useradmin)){
 
                 session.setAttribute("keyAdmin",TypeUser.admin);
-                session.setAttribute("name",useradmin.getNickName());
+                session.setAttribute("nameAdmin",useradmin.getNickName());
                 dao.uploadDateLogin(con,useradmin);
 
                 redirect="/views/admin/admin.jsp";

@@ -17,7 +17,7 @@
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
         <section>
-            <% ArrayList<User> listUserAct = (ArrayList<User>) request.getSession().getAttribute("userNotActiveList");
+            <% ArrayList<User> listUserAct = (ArrayList<User>)request.getSession().getAttribute("userNotActiveList");
 
                 if(listUserAct!=null){%>
             number of active users :<%=listUserAct.size()%>
@@ -48,7 +48,12 @@
                     <td><%=user.getDocument()%></td>
                     <td><%=user.getTypeRol()%></td>
                     <td><%=user.getLastLogin()%></td>
-                    <td>editar</td>
+                    <td>
+                        <form method="post" action="TurnOnUsersServlet">
+                            <input type="hidden" name="deleteUser" value="<%=user.getIdUser()%>">
+                            <input type="submit" value="enable">
+                        </form>
+                    </td>
 
                 </tr>
                 <%}%>

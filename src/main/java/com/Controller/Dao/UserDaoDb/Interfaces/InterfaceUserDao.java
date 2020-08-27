@@ -26,7 +26,7 @@ public interface InterfaceUserDao {
         edit user employee allow us change only selected features
         as email and nick name
      */
-    boolean editUserEmployee(Connection con, User user);
+    boolean editMyUserEmployee(Connection con, User user);
 
     /*
         edit User admin allow us change everything the Admin Wants
@@ -35,7 +35,7 @@ public interface InterfaceUserDao {
 
     boolean deleteUser(Connection con, User user);
 
-    boolean addSupplier(Connection connection,User user);
+
 
     List<User> getUserFeatures(ArrayList<User>list, int search);
 }

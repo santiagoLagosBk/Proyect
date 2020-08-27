@@ -16,7 +16,7 @@ public class FilterAppAdmin implements Filter {
 
         HttpSession session=((HttpServletRequest)req).getSession();
 
-        if (session.getAttribute("keyAdmin")!=null){
+        if (session.getAttribute("keyAdmin")!=null&&session.getAttribute("nameAdmin")!=null){
 
             chain.doFilter(req, resp);
 

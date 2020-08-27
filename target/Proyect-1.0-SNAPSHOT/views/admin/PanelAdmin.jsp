@@ -14,7 +14,11 @@
 <header></header>
 <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
 <main>
-
+    <%if(request.getAttribute("messageAdminUser")!=null){%>
+    <div class="alert alert-success" role="alert">
+        <%=request.getAttribute("messageAdminUser")%>
+    </div>
+    <%}%>
     <%if (request.getAttribute("messageSupplier")!=null){%>
     <div class="alert alert-success" role="alert">
         <%=request.getAttribute("messageSupplier")%>

@@ -17,6 +17,7 @@
     <header></header>
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
+
         <section>
         <% ArrayList<User> listUserAct=(ArrayList)request.getSession().getAttribute("userActiveList");
 
@@ -49,8 +50,18 @@
                          <td><%=user.getDocument()%></td>
                         <td><%=user.getTypeRol()%></td>
                          <td><%=user.getLastLogin()%></td>
-                         <td>editar</td>
-                         <td>innabilitar</td>
+                         <td>
+                             <form method="post" action="ShowUserFeaturesServlet">
+                                 <input type="hidden" name="editUser" value="<%=user.getIdUser()%>">
+                                 <input type="submit" value="editar">
+                             </form>
+                         </td>
+                         <td>
+                             <form method="post" action="TurnOffUsersServlet">
+                                 <input type="hidden" name="turnOffUser" value="<%=user.getIdUser()%>">
+                                 <button onclick=" if(confirm('are you sure')===false) return false;"> deshabilitar</button>
+                             </form>
+                         </td>
                 </tr>
                 <%}%>
 

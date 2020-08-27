@@ -1,6 +1,7 @@
 package com.Controller.Dao.UserDaoDb;
 
 import com.Controller.Dao.UserDaoDb.Interfaces.InterfaceUserDao;
+import com.Model.Category;
 import com.Model.Employee;
 import com.Model.User;
 
@@ -56,6 +57,7 @@ public class UserDao implements InterfaceUserDao {
         return false;
     }
 
+    //  Get current Time
     @Override
     public Timestamp getDate() {
 
@@ -65,6 +67,7 @@ public class UserDao implements InterfaceUserDao {
         return new Timestamp(time);
     }
 
+    //  Update date current Login with Db
     @Override
     public void uploadDateLogin(Connection connection, User user) {
 
@@ -86,6 +89,7 @@ public class UserDao implements InterfaceUserDao {
     }
 
 
+    // get enable or disable users to restrict the access for the page
     @Override
     public ArrayList<User> getActiveAndInactiveUsersList(Connection con,byte choice) {
 
@@ -125,12 +129,45 @@ public class UserDao implements InterfaceUserDao {
     }
 
     @Override
-    public boolean editUserEmployee(Connection con, User user) {
+    public boolean editMyUserEmployee(Connection con, User user) {
+
+
+
         return false;
     }
 
+
+    //  change the status of the access for the page
+    public boolean turnOffAndOnUser(Connection connection,int id,Byte active){
+
+        PreparedStatement ps;
+        try {
+            final String sqlTurnOff = "UPDATE user SET active=? WHERE id_user=?";
+            ps = connection.prepareStatement(sqlTurnOff);
+            ps.setByte(1,active);
+            ps.setInt(2,id);
+
+            while (ps.executeUpdate()!=0){
+                return true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+            return false;
+
+    }
+
+
+
+
     @Override
     public boolean editUserAdmin(Connection connection, User user) {
+
+
+
+
+
+
         return false;
     }
 
@@ -141,14 +178,21 @@ public class UserDao implements InterfaceUserDao {
         return false;
     }
 
-    @Override
-    public boolean addSupplier(Connection connection, User user) {
-        return false;
-    }
+
 
     @Override
     public List<User> getUserFeatures(ArrayList<User> list, int search) {
-        return null;
+
+        List<User> userList = new ArrayList<>();
+        for (User user:list){
+
+            if (user.getIdUser()==search){
+
+                userList.add(user);
+            }
+        }
+
+        return userList;
     }
 
 
