@@ -1,12 +1,13 @@
 package com.Controller.Dao.UserDaoDb;
 
 import com.Controller.Dao.UserDaoDb.Interfaces.InterfaceUserDao;
+import com.Model.Employee;
 import com.Model.User;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 public class UserDao implements InterfaceUserDao {
 
@@ -19,9 +20,9 @@ public class UserDao implements InterfaceUserDao {
 
 
 
-            String sqlLogin = "SELECT * FROM usuario u JOIN usuario_has_rol h ON " +
-                    "u.idusuario = h.usuario_idusuario JOIN rol r ON h.rol_id_rol = r.id_rol " +
-                    "where u.nick=? and u.password=? and r.name_role=? and u.active=?";
+            String sqlLogin = "SELECT * FROM user u JOIN user_has_role h ON " +
+                    "u.id_user = h.fk_id_user JOIN roles r ON h.fk_id_role = r.id_rol " +
+                    "where u.nick_name=? and u.password=? and r.role_name=? and u.active=?";
 
         try {
             ps = con.prepareStatement(sqlLogin);
@@ -29,18 +30,18 @@ public class UserDao implements InterfaceUserDao {
             ps.setString(1, user.getNickName());
             ps.setString(2, user.getPassword());
             ps.setString(3,user.getTypeRol());
-            ps.setBoolean(4, user.isActive());
+            ps.setByte(4, user.getActive());
 
             ResultSet rs= ps.executeQuery();
 
-
             while (rs.next()){
 
-                user.setIdUser(rs.getInt("u.idusuario"));
-                user.setAllName(rs.getString("u.allName"));
-                user.setAllLastName(rs.getString("u.lastname"));
-                user.setTypeRol(rs.getString("r.name_role"));
-                user.setActive(rs.getBoolean("u.active"));
+                user.setIdUser(rs.getInt("u.id_user"));
+                user.setAllName(rs.getString("u.name_user"));
+                user.setAllLastName(rs.getString("u.last_name"));
+                user.setTypeRol(rs.getString("r.role_name"));
+                user.setActive(rs.getByte("u.active"));
+                user.setDocument(rs.getString("identification_doc"));
 
                 return true;
             }
@@ -56,12 +57,12 @@ public class UserDao implements InterfaceUserDao {
     }
 
     @Override
-    public String getDate() {
+    public Timestamp getDate() {
 
-        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-dd-mm hh:mm:ss");
-        Date date= Calendar.getInstance().getTime();
+        java.util.Date currentTime = Calendar.getInstance().getTime();
 
-        return dateFormat.format(date);
+        long time = currentTime.getTime();
+        return new Timestamp(time);
     }
 
     @Override
@@ -71,9 +72,9 @@ public class UserDao implements InterfaceUserDao {
         PreparedStatement ps;
 
         try {
-            String sqlUpdateDate = "update usuario set lastlogin=? where idusuario=?";
+            String sqlUpdateDate = "update user set update_login=?  where id_user=?";
             ps= connection.prepareStatement(sqlUpdateDate);
-            ps.setString(1,user.getLastLogin());
+            ps.setTimestamp(1,user.getLastLogin());
             ps.setInt(2,user.getIdUser());
 
             ps.executeUpdate();
@@ -85,6 +86,70 @@ public class UserDao implements InterfaceUserDao {
     }
 
 
+    @Override
+    public ArrayList<User> getActiveAndInactiveUsersList(Connection con,byte choice) {
+
+
+        ArrayList<User> userArrayList = new ArrayList<>();
+        PreparedStatement ps;
+        final String sqlGetListUsers = "SELECT * FROM user u JOIN user_has_role h ON u.id_user = h.fk_id_user " +
+                "JOIN roles r ON h.fk_id_role = r.id_rol WHERE u.active=?";
+
+        try {
+            ps = con.prepareStatement(sqlGetListUsers);
+            ps.setByte(1,choice);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                User user = new Employee();
+
+                user.setIdUser(rs.getInt("u.id_user"));
+                user.setAllName(rs.getString("u.name_user"));
+                user.setAllLastName(rs.getString("u.last_name"));
+                user.setTypeRol(rs.getString("r.role_name"));
+                user.setActive(rs.getByte("u.active"));
+                user.setDocument(rs.getString("u.identification_doc"));
+                user.setLastLogin(rs.getTimestamp("u.update_login"));
+                user.setEmail(rs.getString("u.email"));
+                user.setNickName(rs.getString("u.nick_name"));
+
+                userArrayList.add(user);
+
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return userArrayList;
+    }
+
+    @Override
+    public boolean editUserEmployee(Connection con, User user) {
+        return false;
+    }
+
+    @Override
+    public boolean editUserAdmin(Connection connection, User user) {
+        return false;
+    }
+
+
+
+    @Override
+    public boolean deleteUser(Connection con, User user) {
+        return false;
+    }
+
+    @Override
+    public boolean addSupplier(Connection connection, User user) {
+        return false;
+    }
+
+    @Override
+    public List<User> getUserFeatures(ArrayList<User> list, int search) {
+        return null;
+    }
 
 
 }

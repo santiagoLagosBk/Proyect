@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Timestamp;
 
 @WebServlet( "/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -30,7 +31,7 @@ public class LoginServlet extends HttpServlet {
         String user= request.getParameter("user");
         String password = request.getParameter("password");
         String type = request.getParameter("selectType");
-        String loginDate = dao.getDate();
+        Timestamp loginDate = dao.getDate();
         HttpSession session= request.getSession();
 
 
@@ -51,7 +52,7 @@ public class LoginServlet extends HttpServlet {
             userEmployee.setTypeRol(type);
             userEmployee.setNickName(user);
             userEmployee.setPassword(password);
-            userEmployee.setActive(true);
+            userEmployee.setActive((byte) 1);
             userEmployee.setLastLogin(loginDate);
             if (dao.login(con,userEmployee)){
 
@@ -73,7 +74,7 @@ public class LoginServlet extends HttpServlet {
             useradmin.setTypeRol(type);
             useradmin.setNickName(user);
             useradmin.setPassword(password);
-            useradmin.setActive(true);
+            useradmin.setActive((byte) 1);
             useradmin.setLastLogin(loginDate);
 
 

@@ -26,7 +26,6 @@ public class DeleteCategoryServlet extends HttpServlet {
         int idCategory = Integer.parseInt(request.getParameter("deleteCategory"));
             category.setIdCategory(idCategory);
 
-
             if(dao.deleteCategory(con,category)){
                 message = "the category was delete";
             }else{

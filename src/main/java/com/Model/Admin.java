@@ -1,5 +1,6 @@
 package com.Model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Admin extends User{
@@ -46,12 +47,12 @@ public class Admin extends User{
     }
 
     @Override
-    public String getLastLogin() {
+    public Timestamp getLastLogin() {
         return super.getLastLogin();
     }
 
     @Override
-    public void setLastLogin(String lastLogin) {
+    public void setLastLogin(Timestamp lastLogin) {
         super.setLastLogin(lastLogin);
     }
 
@@ -76,12 +77,12 @@ public class Admin extends User{
     }
 
     @Override
-    public boolean isActive() {
-        return super.isActive();
+    public byte getActive() {
+        return super.getActive();
     }
 
     @Override
-    public void setActive(boolean active) {
+    public void setActive(byte active) {
         super.setActive(active);
     }
 }

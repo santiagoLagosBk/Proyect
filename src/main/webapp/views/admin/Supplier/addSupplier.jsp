@@ -16,7 +16,7 @@
     <main>
         <%if (request.getAttribute("messageSupplier")!=null){%>
         <div class="alert alert-success" role="alert">
-            <%=request.getAttribute("messageEditSupplier")%>
+            <%=request.getAttribute("messageSupplier")%>
         </div>
         <%}%>
         <form method="post" action="AddSupplierServlet">

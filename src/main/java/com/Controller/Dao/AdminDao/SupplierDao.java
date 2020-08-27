@@ -23,14 +23,14 @@ public class SupplierDao implements InterfaceSupplierDao {
         PreparedStatement ps;
 
         try {
-            final String sqlSuppliers = "SELECT * FROM proveedor";
+            final String sqlSuppliers = "SELECT * FROM supplier";
             ps = con.prepareStatement(sqlSuppliers);
             ResultSet rs= ps.executeQuery();
 
             while (rs.next()){
                 Supplier supplier = new Supplier();
-                supplier.setIdSupplier(rs.getInt("id_proveedor"));
-                supplier.setNameSupplier(rs.getString("name_proveedor"));
+                supplier.setIdSupplier(rs.getInt("id_supplier"));
+                supplier.setNameSupplier(rs.getString("supplier_name"));
                 supplierList.add(supplier);
             }
 
@@ -49,7 +49,7 @@ public class SupplierDao implements InterfaceSupplierDao {
         if (!SupplierDao.searchSupplier(con,supplier.getNameSupplier())){
 
             PreparedStatement ps;
-            final String sqlUpdateSupplier = "UPDATE proveedor SET name_proveedor=? WHERE id_proveedor=?";
+            final String sqlUpdateSupplier = "UPDATE supplier SET supplier_name=? WHERE id_supplier=?";
             try {
 
                 ps = con.prepareStatement(sqlUpdateSupplier);
@@ -69,6 +69,23 @@ public class SupplierDao implements InterfaceSupplierDao {
 
     @Override
     public boolean deleteSupplier(Connection con, Supplier supplier) {
+
+        PreparedStatement ps;
+        final String sqlDelelte = "DELETE FROM supplier WHERE id_supplier=?";
+        try {
+
+            ps = con.prepareStatement(sqlDelelte);
+            ps.setInt(1,supplier.getIdSupplier());
+
+            while (ps.executeUpdate()!=0){
+                return true;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
         return false;
     }
 
@@ -76,10 +93,11 @@ public class SupplierDao implements InterfaceSupplierDao {
     public boolean addSupplier(Connection connection, Supplier supplier) {
 
         PreparedStatement ps;
+        final String sqlAddSupplier = "INSERT INTO supplier (id_supplier,supplier_name) VALUES(null ,?)";
 
         if (!SupplierDao.searchSupplier(connection,supplier.getNameSupplier())) {
             try {
-                final String sqlAddSupplier = "INSERT INTO proveedor (id_proveedor,name_proveedor) VALUES(null ,?)";
+
                 ps = connection.prepareStatement(sqlAddSupplier);
                 ps.setString(1, supplier.getNameSupplier());
 
@@ -113,8 +131,9 @@ public class SupplierDao implements InterfaceSupplierDao {
     private static boolean searchSupplier(Connection connection,String supplierName){
 
         PreparedStatement ps;
-        try {
-            final String sqlSearchSimilar = "SELECT * FROM proveedor where name_proveedor=?";
+        final String sqlSearchSimilar = "SELECT * FROM supplier where supplier_name=?";
+        try{
+
             ps = connection.prepareStatement(sqlSearchSimilar);
             ps.setString(1,supplierName);
             ResultSet rs = ps.executeQuery();

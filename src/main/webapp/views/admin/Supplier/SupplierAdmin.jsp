@@ -45,8 +45,8 @@
                         </form>
                     </td>
                     <td>
-                        <form method="post" action="DeleteCategoryServlet">
-                            <input type="hidden" name="deleteCategory" value="">
+                        <form method="post" action="DeleteSupplierServlet">
+                            <input type="hidden" name="deleteCategory" value="<%=supplier.getIdSupplier()%>">
                             <button onclick=" if(confirm('are you sure')===false) return false;"> submit</button>
                         </form>
                 </tr>

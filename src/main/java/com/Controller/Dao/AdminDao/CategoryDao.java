@@ -24,14 +24,14 @@ public class CategoryDao implements InterfaceCategoryDao {
         PreparedStatement ps;
 
         try{
-             final  String sqlListCategories = "SELECT * from catego";
+             final  String sqlListCategories = "SELECT * from category";
             ps = con.prepareStatement(sqlListCategories);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()){
                 Category category = new Category();
-                category.setIdCategory(rs.getInt("id_Catego"));
-                category.setNameCategory(rs.getString("name_catego"));
+                category.setIdCategory(rs.getInt("id_category"));
+                category.setNameCategory(rs.getString("category_name"));
 
                 listCategories.add(category);
             }
@@ -51,7 +51,7 @@ public class CategoryDao implements InterfaceCategoryDao {
         // first we search a similar data in the database
         if (!CategoryDao.searchCategory(con,category.getNameCategory())) {
             PreparedStatement ps;
-            final String sqlUpdate = "UPDATE catego SET  name_catego=? WHERE id_Catego=?";
+            final String sqlUpdate = "UPDATE category SET  category_name=? WHERE id_category=?";
             try {
 
                 ps = con.prepareStatement(sqlUpdate);
@@ -74,7 +74,7 @@ public class CategoryDao implements InterfaceCategoryDao {
     public boolean deleteCategory(Connection con, Category category) {
 
         PreparedStatement ps;
-        final String sqlDelete = "DELETE FROM catego WHERE id_catego=?";
+        final String sqlDelete = "DELETE FROM category WHERE id_category=?";
         try {
             ps = con.prepareStatement(sqlDelete);
             ps.setInt(1,category.getIdCategory());
@@ -97,7 +97,7 @@ public class CategoryDao implements InterfaceCategoryDao {
         // first we search a similar data in the database
         if (!CategoryDao.searchCategory(connection,category.getNameCategory())){
             PreparedStatement ps;
-            final String sqlInsert = "INSERT INTO catego(id_Catego,name_catego) VALUES (null,?)";
+            final String sqlInsert = "INSERT INTO category(id_category,category_name) VALUES (null,?)";
             try {
 
                 ps = connection.prepareStatement(sqlInsert);
@@ -122,7 +122,7 @@ public class CategoryDao implements InterfaceCategoryDao {
     private static boolean searchCategory(Connection connection,String category){
 
         PreparedStatement ps;
-        final String sqlSearh = "SELECT * from catego WHERE name_catego=?";
+        final String sqlSearh = "SELECT * from category WHERE category_name=?";
         try {
             ps = connection.prepareStatement(sqlSearh);
             ps.setString(1,category);

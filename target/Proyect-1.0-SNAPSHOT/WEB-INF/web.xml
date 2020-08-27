@@ -28,6 +28,8 @@
         <url-pattern>/ShowSupplierServlet</url-pattern>
         <url-pattern>/EditSupplierServlet</url-pattern>
         <url-pattern>/AddSupplierServlet</url-pattern>
+        <url-pattern>/DeleteSupplierServlet</url-pattern>
+
     </filter-mapping>
 
 

@@ -8,7 +8,7 @@ public class Connect {
 
     private static String USERNAME="user";
     private static String PASSWORD="123";
-    private static final String URL="jdbc:mysql://localhost:3306/otra?useTimezone=true&serverTimezone=UTC";
+    private static final String URL="jdbc:mysql://localhost:3306/inverfra?useTimezone=true&serverTimezone=UTC";
 
 
 

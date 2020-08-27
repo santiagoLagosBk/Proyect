@@ -33,7 +33,16 @@
                 <a class="nav-link" href="AdminSupplierServlet">Admin Supplier</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Admin User</a>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                       Admin users
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
+
+                        <a class="nav-link" href="AdminActiveUsersServlet">Active Users</a>
+                        <a class="nav-link" href="AdminNotActiveUsersServlet">Inactive Users</a>
+                    </div>
+                </div>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Admin Products</a>
