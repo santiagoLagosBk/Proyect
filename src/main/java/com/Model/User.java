@@ -18,14 +18,14 @@ public abstract class  User {
     private ArrayList<String>listTypeRole;
 
     private byte active;
-    private static final String COMPARE="<>/'?¡¿|/*-_=()@";
+    private static final String COMPARE="<>/'?¡¿|/*-_=()";
     final int RANG =4;
 
     public String getMessage() {
         return message;
     }
 
-    final private String message="sorry, but you cannot to write symbols as: <>@/?¡¿|/*-_=() and min of \n" +
+    final private String message="sorry, but you cannot to write symbols as: <>/?¡¿|/*-_=() and min of \n" +
             "characters is 5";
 
     public User(int idUser, String allName, String allLastName, String password, Timestamp lastLogin, String nickName, String document, String email, String typeRol, byte active) {

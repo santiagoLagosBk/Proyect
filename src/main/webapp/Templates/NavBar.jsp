@@ -16,8 +16,8 @@
 </head>
 <body>
 <header></header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-   <p>H A N D L E</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <p>H A N D L E</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -27,7 +27,7 @@
                 <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <a class="nav-link" href="#">About Us</a>
             </li>
             <li class="nav-item">
 
@@ -41,15 +41,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
@@ -58,3 +49,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+

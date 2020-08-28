@@ -33,7 +33,7 @@
                     <th>id user</th>
                     <th>name</th>
                     <th>last name</th>
-                    <th>c.c</th>
+                    <th>email</th>
                     <th>role</th>
                     <th>last login</th>
                     <th>actions</th>
@@ -46,7 +46,7 @@
                     <td><%=user.getAllName()%></td>
                     <td><%=user.getAllLastName()%></td>
                     <td><%=user.getDocument()%></td>
-                    <td><%=user.getTypeRol()%></td>
+                    <td><%=user.getEmail()%></td>
                     <td><%=user.getLastLogin()%></td>
                     <td>
                         <form method="post" action="TurnOnUsersServlet">

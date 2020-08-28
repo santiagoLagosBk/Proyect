@@ -16,7 +16,7 @@
 </head>
 <body>
 <header></header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
     <p>H A N D L E</p>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -24,18 +24,18 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="PaneAdminServlet">Home <span class="sr-only">(current)</span></a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="PaneAdminServlet">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="AdminCategoriesServlet">Admin categories</a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="AdminCategoriesServlet">Admin categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="AdminSupplierServlet">Admin Supplier</a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="AdminSupplierServlet">Admin Supplier</a>
             </li>
             <li class="nav-item">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-                       Admin users
+                    <button type="button" class="btn btn btn-outline-light" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                        Admin users
                     </button>
                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-left">
 
@@ -45,19 +45,25 @@
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Admin Products</a>
+                <a style="margin-left: 10px; border: none" class="btn btn-outline-light" href="#">Admin Products</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">profile: <%=request.getSession().getAttribute("nameAdmin")%></a>
-            </li>
-
         </ul>
     </div>
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="LogoutServlet">Logout</a>
-            </li>
-        </ul>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-light" data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
+                    Admin users
+                </button>
+                <div class="dropdown-menu text-center">
+
+                    <a  class="dropdown-item" href="#">profile: <%=request.getSession().getAttribute("nameAdmin")%></a>
+                    <div class="dropdown-divider"></div>
+                    <a  class="dropdown-item" href="LogoutServlet">Logout</a>
+                </div>
+            </div>
+        </li>
+    </ul>
 </nav>
 
 

@@ -19,7 +19,8 @@
     <main>
 
         <section>
-        <% ArrayList<User> listUserAct=(ArrayList)request.getSession().getAttribute("userActiveList");
+        <%
+            ArrayList<User> listUserAct=(ArrayList)request.getSession().getAttribute("userActiveList");
 
            if(listUserAct!=null){%>
             number of active users :<%=listUserAct.size()%>

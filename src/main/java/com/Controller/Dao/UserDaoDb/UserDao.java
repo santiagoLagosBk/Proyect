@@ -1,7 +1,6 @@
 package com.Controller.Dao.UserDaoDb;
 
 import com.Controller.Dao.UserDaoDb.Interfaces.InterfaceUserDao;
-import com.Model.Category;
 import com.Model.Employee;
 import com.Model.User;
 
@@ -115,6 +114,7 @@ public class UserDao implements InterfaceUserDao {
                 user.setDocument(rs.getString("u.identification_doc"));
                 user.setLastLogin(rs.getTimestamp("u.update_login"));
                 user.setEmail(rs.getString("u.email"));
+                user.setPassword(rs.getString("password"));
                 user.setNickName(rs.getString("u.nick_name"));
 
                 userArrayList.add(user);
@@ -164,8 +164,6 @@ public class UserDao implements InterfaceUserDao {
 
     @Override
     public boolean editUserAdmin(Connection connection, User user) {
-
-
 
 
 
