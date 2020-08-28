@@ -14,7 +14,9 @@
 <header></header>
 <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
 <main>
-    <%if(request.getAttribute("messageAdminUser")!=null){%>
+    <%
+        response.setHeader("Cache-Control","no-cache ,no-store,must-revalidate");
+        if(request.getAttribute("messageAdminUser")!=null){%>
     <div class="alert alert-success" role="alert">
         <%=request.getAttribute("messageAdminUser")%>
     </div>

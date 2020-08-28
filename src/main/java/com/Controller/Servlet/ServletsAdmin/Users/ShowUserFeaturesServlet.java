@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +20,21 @@ public class ShowUserFeaturesServlet extends HttpServlet {
 
         UserDao dao = new UserDao();
         ArrayList<User> userArrayList = (ArrayList) request.getSession().getAttribute("userActiveList");
+
         int idUser=Integer.parseInt(request.getParameter("editUser"));
+        Connection con= (Connection) getServletContext().getAttribute("database");
 
-        ArrayList<User>UserFeatures = (ArrayList<User>) dao.getUserFeatures(userArrayList,idUser);
 
-        request.setAttribute("UserFeatures",UserFeatures);
+        /* made two list for avoid  data double from the same user
+            in case the user has two role
+        */
+
+        ArrayList<User>userFeatures = (ArrayList<User>) dao.getUserFeatures(userArrayList,idUser);
+        ArrayList<String> role = (ArrayList<String>) dao.listRole(con,idUser);
+
+
+        request.setAttribute("UserFeatures",userFeatures);
+        request.setAttribute("userRole",role);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/Users/editUserAdmin.jsp");
         dispatcher.forward(request,response);

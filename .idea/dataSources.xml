@@ -7,5 +7,11 @@
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/inverfra?useTimezone=true&amp;serverTimezone=UTC</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="inverfra@localhost [2]" uuid="50190668-107b-4f1f-835a-b90ecd377467">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/inverfra?useTimezone=true&amp;serverTimezone=UTC</jdbc-url>
+    </data-source>
   </component>
 </project>

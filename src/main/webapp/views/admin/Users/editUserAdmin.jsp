@@ -1,5 +1,7 @@
 <%@ page import="com.Model.User" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="com.Model.TypeUser" %><%--
   Created by IntelliJ IDEA.
   User: Hogar
   Date: 27/8/2020
@@ -18,6 +20,7 @@
 
 
     <% ArrayList<User>featuresCategory =(ArrayList)request.getAttribute("UserFeatures");
+        ArrayList<String>listRole = (ArrayList<String>) request.getAttribute("userRole");
         for (User user:featuresCategory){
     %>
 
@@ -31,9 +34,24 @@
         <label>Email</label><br>
         <input type="text" value="<%=user.getEmail()%>" name="email"><br>
         <label>Document</label><br>
-        <input type="text" value="<%=user.getDocument()%>" name="document">
+        <input type="text" value="<%=user.getDocument()%>" name="document"><br>
+
         <label>Role</label><br>
-        <input type="text" value="<%=user.getTypeRol()%>" name="rol">
+
+        <%Iterator<String>iterator= listRole.iterator();
+        if (listRole.size()<2){
+         if (listRole.get(0).equalsIgnoreCase(String.valueOf(TypeUser.admin))){%>
+
+        <label><input type="checkbox" name="cb-autos" > <%=TypeUser.employee%></label><br>
+         <%}else{%>
+        <label><input type="checkbox" name="cb-autos" > <%=TypeUser.admin%></label><br>
+         <%}%>
+        <% }while (iterator.hasNext()){
+        %>
+        <label><input type="checkbox" name="cb-autos" checked> <%=iterator.next()%></label><br>
+
+        <%}%>
+
 
         <input type="submit" value="edit register">
     </form>

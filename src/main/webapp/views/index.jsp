@@ -14,7 +14,10 @@
     <nav><%@include file="../Templates/NavBar.jsp"%></nav>
     <main>
 
-        <%if(request.getAttribute("security")!=null){%>
+        <%
+
+            response.setHeader("Cache-Control","no-cache ,no-store,must-revalidate");
+            if(request.getAttribute("security")!=null){%>
 
             <p><%=request.getAttribute("security")%></p>
         <%}%>

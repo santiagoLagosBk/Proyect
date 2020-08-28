@@ -96,8 +96,7 @@ public class UserDao implements InterfaceUserDao {
 
         ArrayList<User> userArrayList = new ArrayList<>();
         PreparedStatement ps;
-        final String sqlGetListUsers = "SELECT * FROM user u JOIN user_has_role h ON u.id_user = h.fk_id_user " +
-                "JOIN roles r ON h.fk_id_role = r.id_rol WHERE u.active=?";
+        final String sqlGetListUsers = "SELECT * FROM user u  WHERE u.active=?";
 
         try {
             ps = con.prepareStatement(sqlGetListUsers);
@@ -108,10 +107,10 @@ public class UserDao implements InterfaceUserDao {
             while(rs.next()){
                 User user = new Employee();
 
+
                 user.setIdUser(rs.getInt("u.id_user"));
                 user.setAllName(rs.getString("u.name_user"));
                 user.setAllLastName(rs.getString("u.last_name"));
-                user.setTypeRol(rs.getString("r.role_name"));
                 user.setActive(rs.getByte("u.active"));
                 user.setDocument(rs.getString("u.identification_doc"));
                 user.setLastLogin(rs.getTimestamp("u.update_login"));
@@ -122,9 +121,12 @@ public class UserDao implements InterfaceUserDao {
 
             }
 
+
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
         return userArrayList;
     }
 
@@ -184,6 +186,8 @@ public class UserDao implements InterfaceUserDao {
     public List<User> getUserFeatures(ArrayList<User> list, int search) {
 
         List<User> userList = new ArrayList<>();
+
+
         for (User user:list){
 
             if (user.getIdUser()==search){
@@ -191,9 +195,32 @@ public class UserDao implements InterfaceUserDao {
                 userList.add(user);
             }
         }
-
+        
         return userList;
     }
 
+
+    public List<String>listRole(Connection con,int search){
+
+        List<String>listRole= new ArrayList<>();
+        final String sqlRole = "SELECT r.role_name  from roles r JOIN user_has_role uhr on r.id_rol = uhr.fk_id_role " +
+                "JOIN user u on u.id_user = uhr.fk_id_user where u.id_user=?";
+
+        PreparedStatement ps;
+        try {
+            ps = con.prepareStatement(sqlRole);
+            ps.setInt(1,search);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+
+                listRole.add(rs.getString("r.role_name"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return listRole;
+    }
 
 }

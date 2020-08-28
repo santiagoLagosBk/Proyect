@@ -36,7 +36,7 @@
                         <th>name</th>
                         <th>last name</th>
                         <th>c.c</th>
-                        <th>role</th>
+                        <th>email</th>
                         <th>last login</th>
                         <th>actions</th>
                     </tr>
@@ -48,8 +48,9 @@
                          <td><%=user.getAllName()%></td>
                          <td><%=user.getAllLastName()%></td>
                          <td><%=user.getDocument()%></td>
-                        <td><%=user.getTypeRol()%></td>
+                        <td><%=user.getEmail()%></td>
                          <td><%=user.getLastLogin()%></td>
+                        <td><%=user.getEmail()%></td>
                          <td>
                              <form method="post" action="ShowUserFeaturesServlet">
                                  <input type="hidden" name="editUser" value="<%=user.getIdUser()%>">

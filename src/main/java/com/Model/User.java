@@ -1,6 +1,7 @@
 package com.Model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 
 public abstract class  User {
@@ -14,6 +15,7 @@ public abstract class  User {
     private String document;
     private String email;
     private String typeRol;
+    private ArrayList<String>listTypeRole;
 
     private byte active;
     private static final String COMPARE="<>/'?¡¿|/*-_=()@";
@@ -40,6 +42,14 @@ public abstract class  User {
     }
 
     public User(){}
+
+    public ArrayList<String> getListTypeRole() {
+        return listTypeRole;
+    }
+
+    public void setListTypeRole(ArrayList<String> listTypeRole) {
+        this.listTypeRole = listTypeRole;
+    }
 
     public byte getActive() {
         return active;
