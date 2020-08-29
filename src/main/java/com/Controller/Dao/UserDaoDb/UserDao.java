@@ -162,9 +162,9 @@ public class UserDao implements InterfaceUserDao {
 
 
     @Override
-    public boolean editUserAdmin(Connection connection, User user, String[] role) {
+    public int editUserAdmin(Connection connection, User user) {
 
-        boolean access=false;
+        int rowUpdate=0;
 
         PreparedStatement ps;
         final String sqlUpdate = "UPDATE  user SET  nick_name=?, name_user=?, last_name=?, identification_doc=?, email=?, password=? " +
@@ -178,26 +178,20 @@ public class UserDao implements InterfaceUserDao {
             ps.setString(4, user.getDocument());
             ps.setString(5, user.getEmail());
             ps.setString(6, user.getPassword());
+
             ps.setInt(7,user.getIdUser());
 
-            while (ps.executeUpdate()!=0){
-                access=true;
-            }
-
-            if (access){
-                if(UserDao.addRole(connection,role,user.getIdUser())){
-                    return true;
-                }
-            }
+            rowUpdate = ps.executeUpdate();
 
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-
-        return access;
+        return rowUpdate;
     }
-    private static void deleteRole(Connection connection,int idUser){
+
+
+    public  void deleteRole(Connection connection,int idUser){
         PreparedStatement ps;
 
         final String sqlDelete = "DELETE  FROM user_has_role WHERE fk_id_user=?";
@@ -212,23 +206,25 @@ public class UserDao implements InterfaceUserDao {
         }
     }
 
-    private static  boolean addRole(Connection connection, String[] role,int idUser){
+    public boolean addRole(Connection connection, String[] role,int idUser){
         boolean status=false;
 
-        UserDao.deleteRole(connection,idUser);
 
-        final String sqlInsertRole = "insert into user_has_role (fk_id_user,fk_id_role) " +
-                "values(?,?)";
-
+        final String sqlInsertRole = "INSERT INTO user_has_role (fk_id_user,fk_id_role) " +
+                "VALUES(?,?)";
             PreparedStatement ps;
+
         for (String s:role) {
             try {
                 ps = connection.prepareStatement(sqlInsertRole);
                 ps.setInt(1, idUser);
                 ps.setInt(2, Integer.parseInt(s));
+
                 if (ps.executeUpdate()!=0){
                     status= true;
                 }
+            } catch (SQLIntegrityConstraintViolationException e){
+                e.printStackTrace();
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }

@@ -31,7 +31,7 @@ public interface InterfaceUserDao {
     /*
         edit User admin allow us change everything the Admin Wants
      */
-    boolean editUserAdmin(Connection connection, User user,String role[]);
+    int editUserAdmin(Connection connection, User user);
 
     boolean deleteUser(Connection con, User user);
 

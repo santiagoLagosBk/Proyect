@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.ArrayList;
-import java.util.Map;
+
 
 @WebServlet("/EditAdminUsersServlet")
 public class EditAdminUsersServlet extends HttpServlet {
@@ -30,20 +29,15 @@ public class EditAdminUsersServlet extends HttpServlet {
         user.setDocument(request.getParameter("document"));
         user.setNickName(request.getParameter("nickName"));
         user.setPassword(request.getParameter("Password"));
+        String message="Something was wrong";
 
+        if(request.getParameterValues("role")!=null) {
+            dao.editUserAdmin(con, user);
+            dao.deleteRole(con, user.getIdUser());
+            if (dao.addRole(con, request.getParameterValues("role"), user.getIdUser())) {
 
-        String message="There is something";
-
-        String [] listRole = request.getParameterValues("role");
-
-        if (listRole!=null){
-            if(dao.editUserAdmin(con,user,listRole)){
-
-                message="there is something"+listRole.length;
-
+                message = " everything was successfully";
             }
-        }else {
-            message="There aren't nothing here";
         }
 
 
