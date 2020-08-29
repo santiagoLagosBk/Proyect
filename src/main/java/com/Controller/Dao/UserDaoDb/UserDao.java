@@ -162,72 +162,83 @@ public class UserDao implements InterfaceUserDao {
 
 
     @Override
-    public boolean editUserAdmin(Connection connection, User user) {
+    public boolean editUserAdmin(Connection connection, User user, String[] role) {
 
         boolean access=false;
 
         PreparedStatement ps;
-        final String sqlDelete = "DELETE  FROM user_has_role WHERE fk_id_user=?";
+        final String sqlUpdate = "UPDATE  user SET  nick_name=?, name_user=?, last_name=?, identification_doc=?, email=?, password=? " +
+                "WHERE id_user=?";
         try {
 
-            ps = connection.prepareStatement(sqlDelete);
-            ps.setInt(1,user.getIdUser());
+            ps = connection.prepareStatement(sqlUpdate);
+            ps.setString(1, user.getNickName());
+            ps.setString(2, user.getAllName());
+            ps.setString(3, user.getAllLastName());
+            ps.setString(4, user.getDocument());
+            ps.setString(5, user.getEmail());
+            ps.setString(6, user.getPassword());
+            ps.setInt(7,user.getIdUser());
 
             while (ps.executeUpdate()!=0){
                 access=true;
             }
 
+            if (access){
+                if(UserDao.addRole(connection,role,user.getIdUser())){
+                    return true;
+                }
+            }
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+
+        return access;
+    }
+    private static void deleteRole(Connection connection,int idUser){
+        PreparedStatement ps;
+
+        final String sqlDelete = "DELETE  FROM user_has_role WHERE fk_id_user=?";
+
+        try {
+            ps = connection.prepareStatement(sqlDelete);
+            ps.setInt(1,idUser);
+            ps.executeUpdate();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        if (access) {
+    }
+
+    private static  boolean addRole(Connection connection, String[] role,int idUser){
+        boolean status=false;
+
+        UserDao.deleteRole(connection,idUser);
+
+        final String sqlInsertRole = "insert into user_has_role (fk_id_user,fk_id_role) " +
+                "values(?,?)";
+
+            PreparedStatement ps;
+        for (String s:role) {
             try {
-                ps = connection.prepareStatement("UPDATE  user SET  nick_name=?, name_user=?, last_name=?, identification_doc=?, email=?, password=? " +
-                        "WHERE id_user=?");
-                ps.setString(1, user.getNickName());
-                ps.setString(2, user.getAllName());
-                ps.setString(3, user.getAllLastName());
-                ps.setString(4, user.getDocument());
-                ps.setString(5, user.getEmail());
-                ps.setString(6, user.getPassword());
-                ps.setInt(7,user.getIdUser());
+                ps = connection.prepareStatement(sqlInsertRole);
+                ps.setInt(1, idUser);
+                ps.setInt(2, Integer.parseInt(s));
 
-                if (ps.executeUpdate() != 0) {
 
-                    return true;
+
+                if (ps.executeUpdate()!=0){
+                    status= true;
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
 
-
-        return false;
-    }
-
-    public  boolean addRole(Connection connection, String[] role,int idUser){
-
-
-            PreparedStatement ps=null;
-            try {
-                    for (String index:role) {
-                        ps = connection.prepareStatement("insert into user_has_role (fk_id_user,fk_id_role) " +
-                                "values(?,?)");
-
-                        ps.setInt(1, idUser);
-                        ps.setInt(2, Integer.parseInt(index));
-                        ps.executeUpdate();
-                    }
-
-                    if (ps.executeUpdate()!=0){
-                        return true;
-                    }
-
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
        
-        return false;
+        return status;
     }
 
 

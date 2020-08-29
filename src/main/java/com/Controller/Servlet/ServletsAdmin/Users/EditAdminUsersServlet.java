@@ -37,25 +37,15 @@ public class EditAdminUsersServlet extends HttpServlet {
         String [] listRole = request.getParameterValues("role");
 
         if (listRole!=null){
-            if(dao.editUserAdmin(con,user)){
+            if(dao.editUserAdmin(con,user,listRole)){
 
-                if (dao.addRole(con,listRole,user.getIdUser())){
+                message="there is something"+listRole.length;
 
-                    message="edit Successfully"+listRole.length;
-                }else{
-                    message="something was wrong";
-                }
-
-                }
             }
+        }else {
+            message="There aren't nothing here";
+        }
 
-
-            message="nothing was selected, please try again";
-
-
-        /*
-
-         */
 
         request.setAttribute("messageUser",message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
