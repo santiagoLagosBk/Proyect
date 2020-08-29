@@ -226,9 +226,6 @@ public class UserDao implements InterfaceUserDao {
                 ps = connection.prepareStatement(sqlInsertRole);
                 ps.setInt(1, idUser);
                 ps.setInt(2, Integer.parseInt(s));
-
-
-
                 if (ps.executeUpdate()!=0){
                     status= true;
                 }
