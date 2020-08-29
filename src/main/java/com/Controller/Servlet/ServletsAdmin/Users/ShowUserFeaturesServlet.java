@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/ShowUserFeaturesServlet")
 public class ShowUserFeaturesServlet extends HttpServlet {
@@ -30,7 +31,7 @@ public class ShowUserFeaturesServlet extends HttpServlet {
         */
 
         ArrayList<User>userFeatures = (ArrayList<User>) dao.getUserFeatures(userArrayList,idUser);
-        ArrayList<String> role = (ArrayList<String>) dao.listRole(con,idUser);
+        Map<Integer,String> role =  dao.listRole(con,idUser);
 
 
         request.setAttribute("UserFeatures",userFeatures);

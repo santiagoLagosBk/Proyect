@@ -1,7 +1,8 @@
 <%@ page import="com.Model.User" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.Iterator" %>
-<%@ page import="com.Model.TypeUser" %><%--
+<%@ page import="com.Model.TypeUser" %>
+<%@ page import="java.util.Map" %><%--
   Created by IntelliJ IDEA.
   User: Hogar
   Date: 27/8/2020
@@ -20,7 +21,8 @@
 
 
     <% ArrayList<User>featuresCategory =(ArrayList)request.getAttribute("UserFeatures");
-        ArrayList<String>listRole = (ArrayList<String>) request.getAttribute("userRole");
+
+        Map<Integer,String>listRole = (Map<Integer, String>)request.getAttribute("userRole");
         for (User user:featuresCategory){
     %>
 
@@ -42,17 +44,18 @@
 
         <label>Role</label><br>
 
-        <%Iterator<String>iterator= listRole.iterator();
+        <%
+            Iterator<Integer> iterator= listRole.keySet().iterator();
         if (listRole.size()<2){
-         if (listRole.get(0).equalsIgnoreCase(String.valueOf(TypeUser.admin))){%>
+         if (listRole.get(1).equalsIgnoreCase(String.valueOf(TypeUser.admin))){%>
 
-        <label><input type="checkbox" name="role[]" value="<%=TypeUser.employee%>"><%=TypeUser.employee%></label><br>
+        <label><input type="checkbox" name="role" value="2"><%=TypeUser.employee%></label><br>
          <%}else{%>
-        <label><input type="checkbox" name="role[]"  value="<%=TypeUser.admin%>"><%=TypeUser.admin%></label><br>
+        <label><input type="checkbox" name="role"  value="1"><%=TypeUser.admin%></label><br>
          <%}%>
         <% }while (iterator.hasNext()) {
-          String role=iterator.next();%>
-        <label><input type="checkbox" name="role[]" value="<%=role%>" checked> <%=role%></label><br>
+          int role=iterator.next();%>
+        <label><input type="checkbox" name="role" value="<%=role%>" checked> <%=listRole.get(role)%></label><br>
 
         <%}%>
 

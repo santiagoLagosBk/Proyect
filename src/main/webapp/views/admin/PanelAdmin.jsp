@@ -32,6 +32,12 @@
         <%=request.getAttribute("messageCategory")%>
     </div>
     <%}%>
+    <%if (request.getAttribute("messageUser")!=null){%>
+    <div class="alert alert-success" role="alert">
+        <%=request.getAttribute("messageUser")%>
+    </div>
+    <%}%>
+
 
     <h2>welcome to Admin</h2>
 

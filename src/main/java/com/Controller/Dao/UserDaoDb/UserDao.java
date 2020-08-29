@@ -2,12 +2,11 @@ package com.Controller.Dao.UserDaoDb;
 
 import com.Controller.Dao.UserDaoDb.Interfaces.InterfaceUserDao;
 import com.Model.Employee;
+import com.Model.TypeUser;
 import com.Model.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 public class UserDao implements InterfaceUserDao {
 
@@ -165,12 +164,71 @@ public class UserDao implements InterfaceUserDao {
     @Override
     public boolean editUserAdmin(Connection connection, User user) {
 
+        boolean access=false;
 
+        PreparedStatement ps;
+        final String sqlDelete = "DELETE  FROM user_has_role WHERE fk_id_user=?";
+        try {
+
+            ps = connection.prepareStatement(sqlDelete);
+            ps.setInt(1,user.getIdUser());
+
+            while (ps.executeUpdate()!=0){
+                access=true;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        if (access) {
+            try {
+                ps = connection.prepareStatement("UPDATE  user SET  nick_name=?, name_user=?, last_name=?, identification_doc=?, email=?, password=? " +
+                        "WHERE id_user=?");
+                ps.setString(1, user.getNickName());
+                ps.setString(2, user.getAllName());
+                ps.setString(3, user.getAllLastName());
+                ps.setString(4, user.getDocument());
+                ps.setString(5, user.getEmail());
+                ps.setString(6, user.getPassword());
+                ps.setInt(7,user.getIdUser());
+
+                if (ps.executeUpdate() != 0) {
+
+                    return true;
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
 
 
         return false;
     }
 
+    public  boolean addRole(Connection connection, String[] role,int idUser){
+
+
+            PreparedStatement ps=null;
+            try {
+                    for (String index:role) {
+                        ps = connection.prepareStatement("insert into user_has_role (fk_id_user,fk_id_role) " +
+                                "values(?,?)");
+
+                        ps.setInt(1, idUser);
+                        ps.setInt(2, Integer.parseInt(index));
+                        ps.executeUpdate();
+                    }
+
+                    if (ps.executeUpdate()!=0){
+                        return true;
+                    }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+       
+        return false;
+    }
 
 
     @Override
@@ -198,9 +256,9 @@ public class UserDao implements InterfaceUserDao {
     }
 
 
-    public List<String>listRole(Connection con,int search){
+    public Map<Integer,String>listRole(Connection con,int search){
 
-        List<String>listRole= new ArrayList<>();
+        Map<Integer,String>mapRole=new HashMap<>();
         final String sqlRole = "SELECT r.role_name  from roles r JOIN user_has_role uhr on r.id_rol = uhr.fk_id_role " +
                 "JOIN user u on u.id_user = uhr.fk_id_user where u.id_user=?";
 
@@ -209,16 +267,17 @@ public class UserDao implements InterfaceUserDao {
             ps = con.prepareStatement(sqlRole);
             ps.setInt(1,search);
             ResultSet rs = ps.executeQuery();
-
+            int plus=1;
             while (rs.next()){
 
-                listRole.add(rs.getString("r.role_name"));
+                mapRole.put(plus, rs.getString("role_name"));
+                plus++;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return listRole;
+        return mapRole;
     }
 
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Map;
 
 @WebServlet("/EditAdminUsersServlet")
 public class EditAdminUsersServlet extends HttpServlet {
@@ -24,18 +25,41 @@ public class EditAdminUsersServlet extends HttpServlet {
 
         user.setIdUser(Integer.parseInt(request.getParameter("idUser")));
         user.setAllName(request.getParameter("userName"));
-        user.setAllName(request.getParameter("lastName"));
+        user.setAllLastName(request.getParameter("lastName"));
         user.setEmail(request.getParameter("email"));
         user.setDocument(request.getParameter("document"));
         user.setNickName(request.getParameter("nickName"));
         user.setPassword(request.getParameter("Password"));
 
-        String[] listRole=request.getParameterValues("role[]");
 
-        if (listRole==null){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
-            dispatcher.forward(request,response);
-        }
+        String message="There is something";
+
+        String [] listRole = request.getParameterValues("role");
+
+        if (listRole!=null){
+            if(dao.editUserAdmin(con,user)){
+
+                if (dao.addRole(con,listRole,user.getIdUser())){
+
+                    message="edit Successfully"+listRole.length;
+                }else{
+                    message="something was wrong";
+                }
+
+                }
+            }
+
+
+            message="nothing was selected, please try again";
+
+
+        /*
+
+         */
+
+        request.setAttribute("messageUser",message);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
+        dispatcher.forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
