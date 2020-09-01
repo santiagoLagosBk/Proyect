@@ -10,6 +10,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="/views/error.jsp" %>
 <html>
 <head>
     <title>Title</title>
@@ -18,6 +19,7 @@
 <header></header>
 <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
 <main>
+
 
 
     <% ArrayList<User>featuresCategory =(ArrayList)request.getAttribute("UserFeatures");

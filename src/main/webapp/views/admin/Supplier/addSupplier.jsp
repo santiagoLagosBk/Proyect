@@ -14,9 +14,9 @@
     <header></header>
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
-        <%if (request.getAttribute("messageSupplier")!=null){%>
+        <%if (request.getAttribute("messageAdminUser")!=null){%>
         <div class="alert alert-success" role="alert">
-            <%=request.getAttribute("messageSupplier")%>
+            <%=request.getAttribute("messageAdminUser")%>
         </div>
         <%}%>
         <form method="post" action="AddSupplierServlet">

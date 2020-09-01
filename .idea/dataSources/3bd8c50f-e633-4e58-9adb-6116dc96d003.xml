@@ -7,44 +7,44 @@
       <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
       <DefaultCasing>lower/lower</DefaultCasing>
     </root>
-    <schema id="2" parent="1" name="ejemplo">
+    <schema id="2" parent="1" name="app">
       <Collation>latin1_swedish_ci</Collation>
     </schema>
-    <schema id="3" parent="1" name="information_schema">
+    <schema id="3" parent="1" name="ejemplo">
+      <Collation>latin1_swedish_ci</Collation>
+    </schema>
+    <schema id="4" parent="1" name="employees">
+      <Collation>latin1_swedish_ci</Collation>
+    </schema>
+    <schema id="5" parent="1" name="handledb">
+      <Collation>latin1_swedish_ci</Collation>
+    </schema>
+    <schema id="6" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
     </schema>
-    <schema id="4" parent="1" name="inverfra">
+    <schema id="7" parent="1" name="inverfra">
       <Current>1</Current>
+      <Collation>utf8mb4_spanish2_ci</Collation>
+    </schema>
+    <schema id="8" parent="1" name="inverfradb">
       <Collation>utf8_spanish2_ci</Collation>
     </schema>
-    <schema id="5" parent="1" name="mydb">
+    <schema id="9" parent="1" name="linkedin">
+      <Collation>latin1_swedish_ci</Collation>
+    </schema>
+    <schema id="10" parent="1" name="mysql">
+      <Collation>latin1_swedish_ci</Collation>
+    </schema>
+    <schema id="11" parent="1" name="otra">
+      <Collation>latin1_swedish_ci</Collation>
+    </schema>
+    <schema id="12" parent="1" name="performance_schema">
       <Collation>utf8_general_ci</Collation>
     </schema>
-    <schema id="6" parent="1" name="mysql">
+    <schema id="13" parent="1" name="test">
       <Collation>latin1_swedish_ci</Collation>
     </schema>
-    <schema id="7" parent="1" name="otra">
-      <Collation>latin1_swedish_ci</Collation>
-    </schema>
-    <schema id="8" parent="1" name="performance_schema">
-      <Collation>utf8_general_ci</Collation>
-    </schema>
-    <schema id="9" parent="1" name="practice">
-      <Collation>latin1_swedish_ci</Collation>
-    </schema>
-    <schema id="10" parent="1" name="practice2">
-      <Collation>utf8_spanish_ci</Collation>
-    </schema>
-    <schema id="11" parent="1" name="proyect">
-      <Collation>latin1_swedish_ci</Collation>
-    </schema>
-    <schema id="12" parent="1" name="test">
-      <Collation>latin1_swedish_ci</Collation>
-    </schema>
-    <schema id="13" parent="1" name="testrelation">
-      <Collation>utf8_general_ci</Collation>
-    </schema>
-    <schema id="14" parent="1" name="trackzilas_chema">
+    <schema id="14" parent="1" name="user">
       <Collation>latin1_swedish_ci</Collation>
     </schema>
     <collation id="15" parent="1" name="armscii8_bin">
@@ -686,31 +686,23 @@
     <user id="214" parent="1" name="root">
       <Host>::1</Host>
     </user>
-    <user id="215" parent="1" name="root">
+    <user id="215" parent="1" name="user">
       <Host>localhost</Host>
       <ObjectGrants>ALL PRIVILEGES!
 </ObjectGrants>
     </user>
-    <table id="216" parent="4" name="category">
-      <Collation>utf8mb4_spanish2_ci</Collation>
+    <table id="216" parent="7" name="category"/>
+    <table id="217" parent="7" name="product"/>
+    <table id="218" parent="7" name="product_entry">
+      <Collation>utf8_spanish2_ci</Collation>
     </table>
-    <table id="217" parent="4" name="product">
-      <Collation>utf8mb4_spanish2_ci</Collation>
+    <table id="219" parent="7" name="product_output"/>
+    <table id="220" parent="7" name="roles"/>
+    <table id="221" parent="7" name="supplier"/>
+    <table id="222" parent="7" name="user">
+      <Collation>utf8_spanish2_ci</Collation>
     </table>
-    <table id="218" parent="4" name="product_entry"/>
-    <table id="219" parent="4" name="product_output">
-      <Collation>utf8mb4_spanish2_ci</Collation>
-    </table>
-    <table id="220" parent="4" name="roles">
-      <Collation>utf8mb4_spanish2_ci</Collation>
-    </table>
-    <table id="221" parent="4" name="supplier">
-      <Collation>utf8mb4_spanish2_ci</Collation>
-    </table>
-    <table id="222" parent="4" name="user"/>
-    <table id="223" parent="4" name="user_has_role">
-      <Collation>utf8mb4_spanish2_ci</Collation>
-    </table>
+    <table id="223" parent="7" name="user_has_role"/>
     <column id="224" parent="216" name="id_category">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>

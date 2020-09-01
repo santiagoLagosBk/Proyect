@@ -1,5 +1,6 @@
 package com.Controller.Dao.UserDaoDb;
 
+import com.Config.Connect;
 import com.Controller.Dao.UserDaoDb.Interfaces.InterfaceUserDao;
 import com.Model.Employee;
 import com.Model.TypeUser;
@@ -120,8 +121,6 @@ public class UserDao implements InterfaceUserDao {
 
             }
 
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -131,8 +130,6 @@ public class UserDao implements InterfaceUserDao {
 
     @Override
     public boolean editMyUserEmployee(Connection con, User user) {
-
-
 
         return false;
     }
@@ -160,7 +157,7 @@ public class UserDao implements InterfaceUserDao {
 
 
 
-
+    // admin to the account of the user
     @Override
     public int editUserAdmin(Connection connection, User user) {
 
@@ -190,7 +187,7 @@ public class UserDao implements InterfaceUserDao {
         return rowUpdate;
     }
 
-
+    @Override
     public  void deleteRole(Connection connection,int idUser){
         PreparedStatement ps;
 
@@ -201,11 +198,16 @@ public class UserDao implements InterfaceUserDao {
             ps.setInt(1,idUser);
             ps.executeUpdate();
 
+        } catch (SQLIntegrityConstraintViolationException e){
+             e.printStackTrace();
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
 
+
+    @Override
     public boolean addRole(Connection connection, String[] role,int idUser){
         boolean status=false;
 
@@ -239,6 +241,60 @@ public class UserDao implements InterfaceUserDao {
     public boolean deleteUser(Connection con, User user) {
         return false;
     }
+
+
+    public  int searchUser(Connection connection,User user){
+
+        PreparedStatement ps;
+        final String sqlSearchUser = "SELECT id_user FROM user WHERE nick_name=? OR identification_doc=?";
+        try {
+
+            ps = connection.prepareStatement(sqlSearchUser);
+            ps.setString(1,user.getNickName());
+            ps.setString(2,user.getDocument());
+
+            ResultSet rs= ps.executeQuery();
+            if (rs.next()){
+                return rs.getInt("id_user");
+            }
+        } catch (SQLException throwables) {
+
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+
+    @Override
+    public boolean registerUser(Connection connection, User user) {
+
+        PreparedStatement ps;
+        final String sqlUserRegister = "INSERT INTO user (id_user, nick_name, active, name_user, last_name, identification_doc, email, password) " +
+                "VALUES (null,?,?,?,?,?,?,?) ";
+
+            if (searchUser(connection, user)==0) {
+                try {
+
+                    ps = connection.prepareStatement(sqlUserRegister);
+                    ps.setString(1, user.getNickName());
+                    ps.setByte(2, user.getActive());
+                    ps.setString(3, user.getAllName());
+                    ps.setString(4, user.getAllLastName());
+                    ps.setString(5, user.getDocument());
+                    ps.setString(6, user.getEmail());
+                    ps.setString(7, user.getPassword());
+
+
+                    if (ps.executeUpdate()!=0) {
+                        return true;
+                    }
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        return false;
+    }
+
 
 
 

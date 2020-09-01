@@ -6,16 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page errorPage="/views/error.jsp" %>
 <html>
 <head>
     <title>admin</title>
+
 </head>
 <body>
+
 <header></header>
 <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
 <main>
     <%
-        response.setHeader("Cache-Control","no-cache ,no-store,must-revalidate");
         if(request.getAttribute("messageAdminUser")!=null){%>
     <div class="alert alert-success" role="alert">
         <%=request.getAttribute("messageAdminUser")%>
@@ -37,6 +39,7 @@
         <%=request.getAttribute("messageUser")%>
     </div>
     <%}%>
+
 
 
     <h2>welcome to Admin</h2>

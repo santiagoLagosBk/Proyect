@@ -3,6 +3,7 @@ package com.Model;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 public abstract class  User {
 
@@ -15,10 +16,10 @@ public abstract class  User {
     private String document;
     private String email;
     private String typeRol;
-    private ArrayList<String>listTypeRole;
+
 
     private byte active;
-    private static final String COMPARE="<>/'?¡¿|/*-_=()";
+    private static final String COMPARE="<>/'?¡¿|/*$#=()";
     final int RANG =4;
 
     public String getMessage() {
@@ -43,13 +44,53 @@ public abstract class  User {
 
     public User(){}
 
-    public ArrayList<String> getListTypeRole() {
-        return listTypeRole;
+
+    // these methods are for edit and register of users
+    public boolean setListDataUser(User user) {
+
+        ArrayList<String> listDataUser = new ArrayList<>();
+        listDataUser.add(user.getEmail());
+        listDataUser.add(user.getAllName());
+        listDataUser.add(user.getAllLastName());
+        listDataUser.add(user.getNickName());
+        listDataUser.add(user.getPassword());
+
+        if (!isNumeric(user.getDocument())) {
+
+            return true;
+
+        }else {
+
+            listDataUser.add(user.getDocument());
+
+            for (String s : listDataUser) {
+
+                if (searchInput(s)) {
+
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
-    public void setListTypeRole(ArrayList<String> listTypeRole) {
-        this.listTypeRole = listTypeRole;
+    public  boolean isNumeric(String cadena) {
+
+        boolean resultado;
+
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
     }
+    //---------------
+
+
+
 
     public byte getActive() {
         return active;
@@ -143,9 +184,7 @@ public abstract class  User {
      */
     public boolean searchInput(String input){
 
-
         if (input.length()<=RANG){
-
             return true;
         }else {
        for (int i=0;i<input.length();i++) {
@@ -160,5 +199,6 @@ public abstract class  User {
        }
     }
         return false;
-}
+    }
+
 }

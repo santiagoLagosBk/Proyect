@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 
 @WebServlet("/EditAdminUsersServlet")
@@ -22,6 +23,7 @@ public class EditAdminUsersServlet extends HttpServlet {
         UserDao dao = new UserDao();
         Connection con = (Connection) getServletContext().getAttribute("database");
 
+
         user.setIdUser(Integer.parseInt(request.getParameter("idUser")));
         user.setAllName(request.getParameter("userName"));
         user.setAllLastName(request.getParameter("lastName"));
@@ -29,17 +31,24 @@ public class EditAdminUsersServlet extends HttpServlet {
         user.setDocument(request.getParameter("document"));
         user.setNickName(request.getParameter("nickName"));
         user.setPassword(request.getParameter("Password"));
-        String message="Something was wrong";
+        String message=user.getMessage();
 
-        if(request.getParameterValues("role")!=null) {
-            dao.editUserAdmin(con, user);
+
+
+        if(request.getParameterValues("role")!=null && !user.setListDataUser(user)) {
+
+            if (dao.searchUser(con,user)==0) {
+                dao.editUserAdmin(con, user);
+
+            }else{
+                message="this user has been registered before please check";
+            }
             dao.deleteRole(con, user.getIdUser());
-            if (dao.addRole(con, request.getParameterValues("role"), user.getIdUser())) {
 
+            if (dao.addRole(con, request.getParameterValues("role"), user.getIdUser())) {
                 message = " everything was successfully";
             }
         }
-
 
         request.setAttribute("messageUser",message);
         RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");

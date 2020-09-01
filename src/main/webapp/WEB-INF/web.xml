@@ -34,6 +34,9 @@
         <url-pattern>/AdminActiveUsersServlet</url-pattern>
         <url-pattern>/TurnOnUsersServlet</url-pattern>
         <url-pattern>/TurnOffUsersServlet</url-pattern>
+        <url-pattern>/EditAdminUsersServlet</url-pattern>
+        <url-pattern>/ShowUserFeaturesServlet</url-pattern>
+
     </filter-mapping>
 
 

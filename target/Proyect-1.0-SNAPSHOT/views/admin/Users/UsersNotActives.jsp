@@ -1,6 +1,7 @@
 <%@ page import="com.Model.User" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page errorPage="/views/error.jsp" %><%--
   Created by IntelliJ IDEA.
   User: Hogar
   Date: 27/8/2020

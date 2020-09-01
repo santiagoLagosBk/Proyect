@@ -35,7 +35,10 @@ public interface InterfaceUserDao {
 
     boolean deleteUser(Connection con, User user);
 
+    boolean registerUser(Connection connection,User user);
 
+      void deleteRole(Connection connection,int idUser);
+    boolean addRole(Connection connection, String[] role,int idUser);
 
     List<User> getUserFeatures(ArrayList<User>list, int search);
 }

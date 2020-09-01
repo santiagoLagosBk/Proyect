@@ -1,7 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.Model.User" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.Model.Category" %><%--
+<%@ page import="com.Model.Category" %>
+<%@ page errorPage="/views/error.jsp" %><%--
   Created by IntelliJ IDEA.
   User: Hogar
   Date: 27/8/2020
@@ -17,7 +18,9 @@
     <header></header>
     <nav><%@include file="/Templates/NavBarAdmin.jsp"%></nav>
     <main>
-
+        <div>
+            <a href="AddNewUserServlet">add new User</a>
+        </div>
         <section>
         <%
             ArrayList<User> listUserAct=(ArrayList)request.getSession().getAttribute("userActiveList");

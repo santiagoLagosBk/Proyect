@@ -6,8 +6,8 @@ import java.sql.SQLException;
 
 public class Connect {
 
-    private static String USERNAME="root";
-    private static String PASSWORD="";
+    private static final String USERNAME="user";
+    private static final String PASSWORD="123";
     private static final String URL="jdbc:mysql://localhost:3306/inverfra?useTimezone=true&serverTimezone=UTC";
 
 

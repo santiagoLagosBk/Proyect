@@ -1,10 +1,12 @@
 package com.Model;
 
+
+
 import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
+import java.util.*;
 
-public class Employee extends User{
+public class Employee  extends User{
 
 
     @Override
@@ -86,4 +88,6 @@ public class Employee extends User{
     public void setActive(byte active) {
         super.setActive(active);
     }
+
+
 }
