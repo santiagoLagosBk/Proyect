@@ -45,12 +45,8 @@ public class UserDao implements InterfaceUserDao {
 
                 return true;
             }
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-
-
         }
 
         return false;
@@ -148,6 +144,7 @@ public class UserDao implements InterfaceUserDao {
             while (ps.executeUpdate()!=0){
                 return true;
             }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -159,39 +156,62 @@ public class UserDao implements InterfaceUserDao {
 
     // admin to the account of the user
     @Override
-    public int editUserAdmin(Connection connection, User user) {
-
-        int rowUpdate=0;
+    public int editUserAdmin(Connection connection, String password,
+                             String name,String lastName,String email, int idUser) {
 
         PreparedStatement ps;
-        final String sqlUpdate = "UPDATE  user SET  nick_name=?, name_user=?, last_name=?, identification_doc=?, email=?, password=? " +
+
+        final String sqlUpdate = "UPDATE user SET  password=?, name_user=?, last_name=?, email=? " +
                 "WHERE id_user=?";
         try {
 
             ps = connection.prepareStatement(sqlUpdate);
-            ps.setString(1, user.getNickName());
-            ps.setString(2, user.getAllName());
-            ps.setString(3, user.getAllLastName());
-            ps.setString(4, user.getDocument());
-            ps.setString(5, user.getEmail());
-            ps.setString(6, user.getPassword());
+            ps.setString(1, password);
+            ps.setString(2, name);
+            ps.setString(3, lastName);
+            ps.setString(4, email);
+            ps.setInt(5,idUser);
 
-            ps.setInt(7,user.getIdUser());
+             if (ps.executeUpdate()!=0){
 
-             while (ps.executeUpdate()!=0){
-
-                 rowUpdate++;
+                return  1;
              }
-
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        return rowUpdate;
+        return 0;
     }
 
+    public boolean editUserPrincipalData(Connection con,User user){
+
+        PreparedStatement ps;
+        editUserAdmin(con, user.getPassword(),
+                user.getAllName(), user.getAllLastName(),
+                user.getEmail(), user.getIdUser());
 
 
+        if(searchUser(con,user)!=1){
+
+            try {
+                ps = con.prepareStatement("UPDATE user SET nick_name=?,identification_doc=? WHERE id_user=?");
+
+                ps.setString(1, user.getNickName());
+                ps.setString(2,user.getDocument());
+                ps.setInt(3,user.getIdUser());
+
+                if (ps.executeUpdate()!=0){
+                    return true;
+                }
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+
+        return false;
+    }
+    // --------------------------
     @Override
     public  void deleteRole(Connection connection,int idUser){
         PreparedStatement ps;
@@ -203,11 +223,9 @@ public class UserDao implements InterfaceUserDao {
             ps.setInt(1,idUser);
             ps.executeUpdate();
 
-        } catch (SQLIntegrityConstraintViolationException e){
+        } catch (SQLException e){
              e.printStackTrace();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
         }
     }
 
@@ -230,22 +248,16 @@ public class UserDao implements InterfaceUserDao {
                 if (ps.executeUpdate()!=0){
                     status= true;
                 }
-            } catch (SQLIntegrityConstraintViolationException e){
+            } catch (SQLException e){
                 e.printStackTrace();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
             }
         }
 
        
         return status;
     }
+    // ---------------------------
 
-
-    @Override
-    public boolean deleteUser(Connection con, User user) {
-        return false;
-    }
 
 
     public  int searchUser(Connection connection,User user){
@@ -295,6 +307,7 @@ public class UserDao implements InterfaceUserDao {
                     if (ps.executeUpdate()!=0) {
                         return true;
                     }
+
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
@@ -305,22 +318,24 @@ public class UserDao implements InterfaceUserDao {
 
 
 
+
+
+    //  -------------------------------------------------------------------------
     @Override
     public List<User> getUserFeatures(ArrayList<User> list, int search) {
 
         List<User> userList = new ArrayList<>();
 
-
         for (User user:list){
 
             if (user.getIdUser()==search){
-
                 userList.add(user);
             }
         }
-        
         return userList;
     }
+
+
 
     public Map<Integer,String>listRole(Connection con,int search){
 

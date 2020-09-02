@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.Map;
 
 
 @WebServlet("/EditAdminUsersServlet")
@@ -34,11 +35,26 @@ public class EditAdminUsersServlet extends HttpServlet {
         user.setPassword(request.getParameter("Password"));
         String message=user.getMessage();
 
+        int cont=0;
 
+        if (request.getParameterValues("role")!=null && !user.setListDataUser(user)) {
 
-        //if(request.getParameterValues("role")!=null && !user.setListDataUser(user)) {
+               if(dao.editUserPrincipalData(con,user)){
 
-            dao.editUserAdmin(con,user);
+                   message="registro exitos de datos";
+                   cont++;
+               }else{
+                   message="este usuario ya esta registrado";
+               }
+
+               if(cont>0) {
+
+                   dao.deleteRole(con, user.getIdUser());
+                   dao.addRole(con, request.getParameterValues("role"), user.getIdUser());
+                   message.concat(" junto con los roles");
+               }
+
+        }
 
             request.setAttribute("messageUser",message);
             RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
@@ -49,15 +65,14 @@ public class EditAdminUsersServlet extends HttpServlet {
         /*
         if(dao.editUserAdmin(con,user)!=0) {
 
-                dao.deleteRole(con, user.getIdUser());
-                dao.addRole(con, request.getParameterValues("role"), user.getIdUser());
-                message="edit successfully";
+
             }
          */
 
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
     }
 }

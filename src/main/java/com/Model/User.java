@@ -165,6 +165,7 @@ public abstract class  User {
         listDataUser.add(user.getNickName());
         listDataUser.add(user.getPassword());
 
+
         if (isNumeric(user.getDocument()) && user.getDocument().length() <=10) {
 
             listDataUser.add(user.getDocument());

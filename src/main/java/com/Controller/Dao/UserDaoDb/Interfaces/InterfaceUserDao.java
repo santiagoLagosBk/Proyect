@@ -31,13 +31,13 @@ public interface InterfaceUserDao {
     /*
         edit User admin allow us change everything the Admin Wants
      */
-    int editUserAdmin(Connection connection, User user);
+    int editUserAdmin(Connection connection, String password,String name,String lastName,String email, int idUser);
 
-    boolean deleteUser(Connection con, User user);
 
     boolean registerUser(Connection connection,User user);
 
-      void deleteRole(Connection connection,int idUser);
+    void deleteRole(Connection connection,int idUser);
+
     boolean addRole(Connection connection, String[] role,int idUser);
 
     List<User> getUserFeatures(ArrayList<User>list, int search);

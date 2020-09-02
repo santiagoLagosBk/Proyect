@@ -38,13 +38,13 @@ public class AddNewUserServlet extends HttpServlet {
             if (role!=null && !user.setListDataUser(user)) {
 
                     user.setActive((byte) 1);
+
                 if (requestPassword.equals(user.getPassword())) {
 
                     if (dao.registerUser(con, user)) {
                         dao.addRole(con, role, dao.searchUser(con, user));
                         message = "user registered successfully";
                         redirect = "views/admin/PanelAdmin.jsp";
-
                     } else {
                         message = "sorry this user already has been registered";
                     }
