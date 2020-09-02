@@ -178,7 +178,10 @@ public class UserDao implements InterfaceUserDao {
 
             ps.setInt(7,user.getIdUser());
 
-            rowUpdate = ps.executeUpdate();
+             while (ps.executeUpdate()!=0){
+
+                 rowUpdate++;
+             }
 
         }catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -186,6 +189,8 @@ public class UserDao implements InterfaceUserDao {
 
         return rowUpdate;
     }
+
+
 
     @Override
     public  void deleteRole(Connection connection,int idUser){
@@ -254,7 +259,8 @@ public class UserDao implements InterfaceUserDao {
             ps.setString(2,user.getDocument());
 
             ResultSet rs= ps.executeQuery();
-            if (rs.next()){
+
+            while (rs.next()){
                 return rs.getInt("id_user");
             }
         } catch (SQLException throwables) {
@@ -263,6 +269,7 @@ public class UserDao implements InterfaceUserDao {
         }
         return 0;
     }
+
 
 
     @Override
@@ -314,7 +321,6 @@ public class UserDao implements InterfaceUserDao {
         
         return userList;
     }
-
 
     public Map<Integer,String>listRole(Connection con,int search){
 

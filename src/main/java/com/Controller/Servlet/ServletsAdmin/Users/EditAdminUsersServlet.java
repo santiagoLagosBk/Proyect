@@ -1,5 +1,6 @@
 package com.Controller.Servlet.ServletsAdmin.Users;
 
+import com.Config.Connect;
 import com.Controller.Dao.UserDaoDb.UserDao;
 import com.Model.Employee;
 import com.Model.User;
@@ -35,24 +36,25 @@ public class EditAdminUsersServlet extends HttpServlet {
 
 
 
-        if(request.getParameterValues("role")!=null && !user.setListDataUser(user)) {
+        //if(request.getParameterValues("role")!=null && !user.setListDataUser(user)) {
 
-            if (dao.searchUser(con,user)==0) {
-                dao.editUserAdmin(con, user);
+            dao.editUserAdmin(con,user);
 
-            }else{
-                message="this user has been registered before please check";
+            request.setAttribute("messageUser",message);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
+            dispatcher.forward(request,response);
+
+
+
+        /*
+        if(dao.editUserAdmin(con,user)!=0) {
+
+                dao.deleteRole(con, user.getIdUser());
+                dao.addRole(con, request.getParameterValues("role"), user.getIdUser());
+                message="edit successfully";
             }
-            dao.deleteRole(con, user.getIdUser());
+         */
 
-            if (dao.addRole(con, request.getParameterValues("role"), user.getIdUser())) {
-                message = " everything was successfully";
-            }
-        }
-
-        request.setAttribute("messageUser",message);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("views/admin/PanelAdmin.jsp");
-        dispatcher.forward(request,response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

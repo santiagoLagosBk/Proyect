@@ -19,8 +19,8 @@ public abstract class  User {
 
 
     private byte active;
-    private static final String COMPARE="<>/'?¡¿|/*$#=()";
-    final int RANG =4;
+    private static final String COMPARE="<>/'?¡¿|*$#=()";
+    final int RANG =4 ;
 
     public String getMessage() {
         return message;
@@ -43,54 +43,6 @@ public abstract class  User {
     }
 
     public User(){}
-
-
-    // these methods are for edit and register of users
-    public boolean setListDataUser(User user) {
-
-        ArrayList<String> listDataUser = new ArrayList<>();
-        listDataUser.add(user.getEmail());
-        listDataUser.add(user.getAllName());
-        listDataUser.add(user.getAllLastName());
-        listDataUser.add(user.getNickName());
-        listDataUser.add(user.getPassword());
-
-        if (!isNumeric(user.getDocument())) {
-
-            return true;
-
-        }else {
-
-            listDataUser.add(user.getDocument());
-
-            for (String s : listDataUser) {
-
-                if (searchInput(s)) {
-
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public  boolean isNumeric(String cadena) {
-
-        boolean resultado;
-
-        try {
-            Integer.parseInt(cadena);
-            resultado = true;
-        } catch (NumberFormatException excepcion) {
-            resultado = false;
-        }
-
-        return resultado;
-    }
-    //---------------
-
-
-
 
     public byte getActive() {
         return active;
@@ -182,10 +134,12 @@ public abstract class  User {
     data user
 
      */
+
     public boolean searchInput(String input){
 
         if (input.length()<=RANG){
             return true;
+
         }else {
        for (int i=0;i<input.length();i++) {
 
@@ -199,6 +153,48 @@ public abstract class  User {
        }
     }
         return false;
+    }
+
+    public boolean setListDataUser(User user) {
+
+        ArrayList<String> listDataUser = new ArrayList<>();
+
+        listDataUser.add(user.getEmail());
+        listDataUser.add(user.getAllName());
+        listDataUser.add(user.getAllLastName());
+        listDataUser.add(user.getNickName());
+        listDataUser.add(user.getPassword());
+
+        if (isNumeric(user.getDocument()) && user.getDocument().length() <=10) {
+
+            listDataUser.add(user.getDocument());
+
+            for (String s : listDataUser) {
+
+                if (searchInput(s)) {
+
+                    return true;
+                }
+            }
+
+        }else {
+            return true;
+        }
+        return false;
+    }
+
+
+    public  boolean isNumeric(String cadena) {
+
+        boolean resultado;
+        try {
+            Integer.parseInt(cadena);
+            resultado = true;
+        } catch (NumberFormatException excepcion) {
+            resultado = false;
+        }
+
+        return resultado;
     }
 
 }
